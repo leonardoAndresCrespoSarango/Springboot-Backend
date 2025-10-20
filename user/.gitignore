@@ -31,7 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
-.idea/
+microservicios/.idea
 logs/
 **/firebase-service-account.json
 user/src/main/resources/*.json
