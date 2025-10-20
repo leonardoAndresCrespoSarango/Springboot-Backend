@@ -1,0 +1,207 @@
+// com.etikos.user.controller.UserController
+package com.etikos.user.controller;
+
+import com.etikos.user.audit.AuditAction;
+import com.etikos.user.audit.AuditService;
+import com.etikos.user.dto.*;
+import com.etikos.user.services.UserProfileService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
+    private final UserProfileService userService;
+    private final AuditService audit;
+
+    public UserController(UserProfileService userService, AuditService audit) {
+        this.userService = userService;
+        this.audit = audit;
+    }
+
+    // REGISTER (público)
+    @PostMapping("/register")
+    public ResponseEntity<UserProfileDto> register(@Valid @RequestBody RegisterRequest req,
+                                                   HttpServletRequest http) throws Exception {
+        log.info("Registration request received for email: {}", req.getEmail());
+        UserProfileDto created = userService.register(req);
+        audit.log(created.getUid(), null, AuditAction.REGISTER, http, null);
+        return ResponseEntity.ok(created);
+    }
+
+    // LOGIN (público)
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req,
+                                               HttpServletRequest http) {
+        try {
+            log.info("Login request received for email: {}", req.getEmail());
+            LoginResponse response = userService.login(req);
+
+            // Auditar login exitoso
+            audit.log(response.getUser().getUid(), response.getUser().getUid(), AuditAction.LOGIN, http, null);
+
+            log.info("Login successful for email: {}", req.getEmail());
+            return ResponseEntity.ok(response);
+
+        } catch (UserProfileService.LoginFailedException e) {
+            // Auditar login fallido con la razón específica
+            log.warn("Login failed for email: {} - Reason: {}", req.getEmail(), e.getReason());
+
+            Map<String, Object> meta = Map.of(
+                "email", req.getEmail(),
+                "reason", e.getReason(),
+                "message", e.getMessage()
+            );
+
+            try {
+                audit.log(null, null, AuditAction.LOGIN_FAILED, http, meta);
+            } catch (Exception auditException) {
+                log.error("Failed to log audit for failed login attempt", auditException);
+            }
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(null);
+
+        } catch (Exception e) {
+            // Error inesperado
+            log.error("Unexpected error during login for email: {}", req.getEmail(), e);
+
+            Map<String, Object> meta = Map.of(
+                "email", req.getEmail(),
+                "reason", "SYSTEM_ERROR",
+                "error", e.getClass().getSimpleName()
+            );
+
+            try {
+                audit.log(null, null, AuditAction.LOGIN_FAILED, http, meta);
+            } catch (Exception auditException) {
+                log.error("Failed to log audit for failed login attempt", auditException);
+            }
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+    // LIST ALL USERS (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<UserProfileDto>> listUsers(Authentication auth) throws Exception {
+        log.debug("Admin listing all users");
+        List<UserProfileDto> users = userService.listAll();
+        return ResponseEntity.ok(users);
+    }
+
+    // GET USER BY ID (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{uid}")
+    public ResponseEntity<UserProfileDto> getUserById(@PathVariable String uid, Authentication auth) throws Exception {
+        log.debug("Admin fetching user by ID: {}", uid);
+        UserProfileDto user = userService.getById(uid);
+        return ResponseEntity.ok(user);
+    }
+
+    // CREDENTIALS_UPDATED (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{uid}/credentials")
+    public ResponseEntity<Void> updateCredentials(@PathVariable String uid,
+                                                  @RequestBody UpdateCredentialsRequest body,
+                                                  HttpServletRequest http,
+                                                  Authentication auth) throws Exception {
+        log.info("Admin updating credentials for user: {}", uid);
+        userService.updateCredentials(uid, body.getNewEmail(), body.getNewPassword());
+
+        var meta = new java.util.HashMap<String,Object>();
+        if (body.getNewEmail() != null) meta.put("newEmail", body.getNewEmail());
+        audit.log(uid, principalUid(auth), AuditAction.CREDENTIALS_UPDATED, http, meta);
+        return ResponseEntity.ok().build();
+    }
+
+    // BLOCK / UNBLOCK (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{uid}/block")
+    public ResponseEntity<Void> block(@PathVariable String uid,
+                                      @Valid @RequestBody BlockRequest body,
+                                      HttpServletRequest http,
+                                      Authentication auth) throws Exception {
+        log.info("Admin {} user: {}", body.getDisabled() ? "blocking" : "unblocking", uid);
+        userService.setDisabled(uid, body.getDisabled());
+        audit.log(uid, principalUid(auth), body.getDisabled() ? AuditAction.USER_BLOCKED : AuditAction.USER_UNBLOCKED,
+                http, null);
+        return ResponseEntity.ok().build();
+    }
+
+    // DELETE USER (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{uid}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String uid,
+                                          HttpServletRequest http,
+                                          Authentication auth) throws Exception {
+        log.info("Admin deleting user: {}", uid);
+        userService.deleteById(uid);
+        audit.log(uid, principalUid(auth), AuditAction.REGISTER, http, null);
+        return ResponseEntity.ok().build();
+    }
+
+    // PASSWORD RESET (público) - Placeholder para implementación futura
+    @PostMapping("/password-reset")
+    public ResponseEntity<Map<String, String>> passwordReset(@RequestParam("email") String email,
+                                              HttpServletRequest http) throws Exception {
+        log.info("Password reset requested for email: {}", email);
+        Map<String, Object> meta = Map.of("email", email);
+        audit.log(null, null, AuditAction.PASSWORD_RESET_LINK_SENT, http, meta);
+        return ResponseEntity.ok(Map.of("message", "Password reset link will be sent to email (not implemented yet)"));
+    }
+
+    private String principalUid(Authentication auth) {
+        return (auth != null && auth.getPrincipal() != null) ? auth.getPrincipal().toString() : null;
+    }
+
+    @PostMapping("/audit/logout")
+    public ResponseEntity<Map<String, String>> auditLogout(HttpServletRequest http, Authentication auth) {
+        try {
+            String userId = principalUid(auth);
+
+            // Solo registrar si hay un usuario autenticado
+            if (userId != null && !userId.isEmpty()) {
+                log.info("User logout: {}", userId);
+                audit.log(userId, userId, AuditAction.LOGOUT, http, null);
+                return ResponseEntity.ok(Map.of("message", "Logout successful"));
+            } else {
+                log.debug("Logout attempt without valid authentication");
+                return ResponseEntity.ok(Map.of("message", "Already logged out"));
+            }
+        } catch (Exception e) {
+            log.error("Error during logout audit", e);
+            // No fallar el logout si hay error en auditoría
+            return ResponseEntity.ok(Map.of("message", "Logout completed"));
+        }
+    }
+
+    @PostMapping("/audit/login-failed")
+    public ResponseEntity<Map<String, String>> auditLoginFailed(@RequestParam String email,
+                                                                @RequestParam String reason,
+                                                                HttpServletRequest http) {
+        try {
+            log.warn("Manual login failed audit for email: {} - Reason: {}", email, reason);
+            Map<String, Object> meta = Map.of("email", email, "reason", reason);
+            audit.log(null, null, AuditAction.LOGIN_FAILED, http, meta);
+            return ResponseEntity.ok(Map.of("message", "Audit logged"));
+        } catch (Exception e) {
+            log.error("Error logging failed login audit", e);
+            return ResponseEntity.ok(Map.of("message", "Audit skipped"));
+        }
+    }
+}

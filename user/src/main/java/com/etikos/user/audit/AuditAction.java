@@ -1,0 +1,8 @@
+package com.etikos.user.audit;
+public enum AuditAction {
+    REGISTER, LOGIN, LOGOUT, LOGIN_FAILED,
+    PASSWORD_RESET_LINK_SENT,
+    CREDENTIALS_UPDATED,
+    USER_BLOCKED, USER_UNBLOCKED,
+    ROLE_CHANGED
+}
