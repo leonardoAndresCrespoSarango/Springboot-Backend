@@ -33,5 +33,5 @@ build/
 .vscode/
 .idea/
 logs/
-src/main/resources/*.json
-src/main/resources/.env
+user/src/main/resources/*.json
+user/src/main/resources/.env
