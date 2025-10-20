@@ -33,5 +33,6 @@ build/
 .vscode/
 .idea/
 logs/
+**/firebase-service-account.json
 user/src/main/resources/*.json
 user/src/main/resources/.env
