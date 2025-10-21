@@ -7,6 +7,7 @@ public class UserProfileDto {
     private String name;
     private String lastname;
     private String role; // "CUSTOMER" o "ADMIN"
+    private boolean biometricEnabled; // Indica si el usuario tiene biometría habilitada
 
     public String getUid() {
         return uid;
@@ -54,5 +55,13 @@ public class UserProfileDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isBiometricEnabled() {
+        return biometricEnabled;
+    }
+
+    public void setBiometricEnabled(boolean biometricEnabled) {
+        this.biometricEnabled = biometricEnabled;
     }
 }

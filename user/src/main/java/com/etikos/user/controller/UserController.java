@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import java.util.List;
 import java.util.Map;
 
@@ -163,6 +164,40 @@ public class UserController {
         Map<String, Object> meta = Map.of("email", email);
         audit.log(null, null, AuditAction.PASSWORD_RESET_LINK_SENT, http, meta);
         return ResponseEntity.ok(Map.of("message", "Password reset link will be sent to email (not implemented yet)"));
+    }
+
+    // DTO para preferencia biométrica
+    class BiometricPreferenceDto {
+        public boolean enabled;
+        public BiometricPreferenceDto() {}
+        public BiometricPreferenceDto(boolean enabled) { this.enabled = enabled; }
+    }
+
+    // ENDPOINT: Actualizar preferencia biométrica (usuario autenticado)
+    @PutMapping("/biometric")
+    public ResponseEntity<Void> updateBiometric(@RequestBody BiometricPreferenceDto dto, Authentication authentication) throws Exception {
+        String uid = authentication.getName();
+        userService.updateBiometricPreference(uid, dto.enabled);
+        return ResponseEntity.ok().build();
+    }
+
+    // ENDPOINT: Consultar preferencia biométrica (usuario autenticado o admin)
+    @GetMapping("/{uid}/biometric")
+    public ResponseEntity<BiometricPreferenceDto> getBiometric(@PathVariable String uid, Authentication authentication) throws Exception {
+        // Permitir solo al propio usuario o admin
+        boolean isAdmin = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        if (!isAdmin && !authentication.getName().equals(uid)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        boolean enabled = userService.getBiometricPreference(uid);
+        return ResponseEntity.ok(new BiometricPreferenceDto(enabled));
+    }
+
+    // ENDPOINT: Listar estado biométrico de todos los usuarios (solo admin)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/biometric-status")
+    public ResponseEntity<List<Map<String, Object>>> getAllBiometricStatus() throws Exception {
+        return ResponseEntity.ok(userService.getAllUsersBiometricStatus());
     }
 
     private String principalUid(Authentication auth) {

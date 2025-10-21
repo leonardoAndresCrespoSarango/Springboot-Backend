@@ -72,6 +72,7 @@ public class UserProfileService {
         userData.put("disabled", false);
         userData.put("createdAt", com.google.cloud.Timestamp.now());
         userData.put("updatedAt", com.google.cloud.Timestamp.now());
+        userData.put("biometricEnabled", false); // Nuevo campo para biometría
 
         db.collection("users").document(uid).set(userData).get();
 
@@ -201,6 +202,42 @@ public class UserProfileService {
         db.collection("users").document(uid).delete().get();
     }
 
+    /**
+     * Actualiza la preferencia de biometría del usuario
+     */
+    public void updateBiometricPreference(String uid, boolean enabled) throws ExecutionException, InterruptedException {
+        Firestore db = FirestoreClient.getFirestore();
+        db.collection("users").document(uid).update("biometricEnabled", enabled).get();
+    }
+
+    /**
+     * Consulta si el usuario tiene biometría habilitada
+     */
+    public boolean getBiometricPreference(String uid) throws ExecutionException, InterruptedException {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot doc = db.collection("users").document(uid).get().get();
+        Boolean enabled = doc.getBoolean("biometricEnabled");
+        return enabled != null && enabled;
+    }
+
+    /**
+     * Devuelve el estado de biometría de todos los usuarios (solo para admin)
+     */
+    public List<Map<String, Object>> getAllUsersBiometricStatus() throws ExecutionException, InterruptedException {
+        Firestore db = FirestoreClient.getFirestore();
+        List<QueryDocumentSnapshot> docs = db.collection("users").get().get().getDocuments();
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (QueryDocumentSnapshot doc : docs) {
+            Map<String, Object> user = new HashMap<>();
+            user.put("uid", doc.getString("uid"));
+            user.put("email", doc.getString("email"));
+            user.put("username", doc.getString("username"));
+            user.put("biometricEnabled", doc.getBoolean("biometricEnabled") != null && doc.getBoolean("biometricEnabled"));
+            result.add(user);
+        }
+        return result;
+    }
+
     private UserProfileDto documentToDto(DocumentSnapshot doc) {
         UserProfileDto dto = new UserProfileDto();
         dto.setUid(doc.getString("uid"));
@@ -209,6 +246,8 @@ public class UserProfileService {
         dto.setName(doc.getString("name"));
         dto.setLastname(doc.getString("lastname"));
         dto.setRole(doc.getString("role"));
+        Boolean biometricEnabled = doc.getBoolean("biometricEnabled");
+        dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
         return dto;
     }
 
@@ -220,6 +259,8 @@ public class UserProfileService {
         dto.setName((String) data.get("name"));
         dto.setLastname((String) data.get("lastname"));
         dto.setRole((String) data.get("role"));
+        Boolean biometricEnabled = (Boolean) data.get("biometricEnabled");
+        dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
         return dto;
     }
 

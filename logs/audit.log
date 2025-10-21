@@ -1,3 +1,2 @@
-2025-10-19 22:50:13.843 WARN  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: dinno_nugget@proton.me | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
-2025-10-19 22:51:23.797 WARN  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: dinno_nugget@proton.me | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
-2025-10-19 22:56:03.106 WARN  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: dinno_nugget@proton.me | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-21 00:03:00.947 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-21 00:03:39.228 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
