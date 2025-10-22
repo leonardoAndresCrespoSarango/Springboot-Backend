@@ -1,2 +1,1 @@
-2025-10-21 00:03:00.947 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
-2025-10-21 00:03:39.228 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-22 00:00:55.257 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252

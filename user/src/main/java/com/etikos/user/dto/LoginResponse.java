@@ -4,6 +4,8 @@ public class LoginResponse {
 
     private String token;
     private UserProfileDto user;
+    private boolean totpRequired; // Indica si el usuario debe proporcionar código TOTP
+    private String tempSessionId; // ID de sesión temporal antes de validar TOTP
 
     // Constructors
     public LoginResponse() {
@@ -29,6 +31,22 @@ public class LoginResponse {
 
     public void setUser(UserProfileDto user) {
         this.user = user;
+    }
+
+    public boolean isTotpRequired() {
+        return totpRequired;
+    }
+
+    public void setTotpRequired(boolean totpRequired) {
+        this.totpRequired = totpRequired;
+    }
+
+    public String getTempSessionId() {
+        return tempSessionId;
+    }
+
+    public void setTempSessionId(String tempSessionId) {
+        this.tempSessionId = tempSessionId;
     }
 }
 

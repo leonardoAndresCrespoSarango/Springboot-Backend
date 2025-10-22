@@ -61,9 +61,9 @@ public class UserController {
             log.warn("Login failed for email: {} - Reason: {}", req.getEmail(), e.getReason());
 
             Map<String, Object> meta = Map.of(
-                "email", req.getEmail(),
-                "reason", e.getReason(),
-                "message", e.getMessage()
+                    "email", req.getEmail(),
+                    "reason", e.getReason(),
+                    "message", e.getMessage()
             );
 
             try {
@@ -80,9 +80,9 @@ public class UserController {
             log.error("Unexpected error during login for email: {}", req.getEmail(), e);
 
             Map<String, Object> meta = Map.of(
-                "email", req.getEmail(),
-                "reason", "SYSTEM_ERROR",
-                "error", e.getClass().getSimpleName()
+                    "email", req.getEmail(),
+                    "reason", "SYSTEM_ERROR",
+                    "error", e.getClass().getSimpleName()
             );
 
             try {
@@ -93,6 +93,61 @@ public class UserController {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
+        }
+    }
+
+    // LOGIN CON BIOMETRÍA (público)
+    @PostMapping("/login/biometric")
+    public ResponseEntity<LoginResponse> loginWithBiometric(@RequestParam String uid,
+                                                            HttpServletRequest http) {
+        try {
+            log.info("Biometric login request received for user: {}", uid);
+            LoginResponse response = userService.loginWithBiometric(uid);
+
+            // Si no requiere TOTP, auditar login exitoso
+            if (!response.isTotpRequired()) {
+                audit.log(uid, uid, AuditAction.LOGIN, http,
+                    Map.of("method", "biometric"));
+            }
+
+            log.info("Biometric login successful for user: {}", uid);
+            return ResponseEntity.ok(response);
+
+        } catch (UserProfileService.LoginFailedException e) {
+            log.warn("Biometric login failed for user: {} - Reason: {}", uid, e.getReason());
+
+            Map<String, Object> meta = Map.of(
+                    "uid", uid,
+                    "method", "biometric",
+                    "reason", e.getReason(),
+                    "message", e.getMessage()
+            );
+
+            try {
+                audit.log(uid, uid, AuditAction.LOGIN_FAILED, http, meta);
+            } catch (Exception auditException) {
+                log.error("Failed to log audit for failed biometric login", auditException);
+            }
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+
+        } catch (Exception e) {
+            log.error("Unexpected error during biometric login for user: {}", uid, e);
+
+            Map<String, Object> meta = Map.of(
+                    "uid", uid,
+                    "method", "biometric",
+                    "reason", "SYSTEM_ERROR",
+                    "error", e.getClass().getSimpleName()
+            );
+
+            try {
+                audit.log(uid, uid, AuditAction.LOGIN_FAILED, http, meta);
+            } catch (Exception auditException) {
+                log.error("Failed to log audit for failed biometric login", auditException);
+            }
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -148,8 +203,8 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{uid}")
     public ResponseEntity<Void> deleteUser(@PathVariable String uid,
-                                          HttpServletRequest http,
-                                          Authentication auth) throws Exception {
+                                           HttpServletRequest http,
+                                           Authentication auth) throws Exception {
         log.info("Admin deleting user: {}", uid);
         userService.deleteById(uid);
         audit.log(uid, principalUid(auth), AuditAction.REGISTER, http, null);
@@ -159,12 +214,173 @@ public class UserController {
     // PASSWORD RESET (público) - Placeholder para implementación futura
     @PostMapping("/password-reset")
     public ResponseEntity<Map<String, String>> passwordReset(@RequestParam("email") String email,
-                                              HttpServletRequest http) throws Exception {
+                                                             HttpServletRequest http) throws Exception {
         log.info("Password reset requested for email: {}", email);
         Map<String, Object> meta = Map.of("email", email);
         audit.log(null, null, AuditAction.PASSWORD_RESET_LINK_SENT, http, meta);
         return ResponseEntity.ok(Map.of("message", "Password reset link will be sent to email (not implemented yet)"));
     }
+
+    // ==================== ENDPOINTS TOTP ====================
+
+    /**
+     * Inicia la configuración de TOTP para el usuario autenticado.
+     * Devuelve un QR code para escanear con Google Authenticator
+     */
+    @PostMapping("/totp/setup")
+    public ResponseEntity<TotpSetupResponse> setupTotp(Authentication authentication,
+                                                       HttpServletRequest http) {
+        try {
+            String uid = authentication.getName();
+            log.info("TOTP setup requested by user: {}", uid);
+
+            Map<String, String> setup = userService.setupTotp(uid);
+
+            TotpSetupResponse response = new TotpSetupResponse(
+                setup.get("secret"),
+                setup.get("qrCodeDataUri")
+            );
+
+            audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
+                Map.of("action", "totp_setup_initiated"));
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error setting up TOTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * Verifica el código TOTP y habilita TOTP para el usuario si es correcto
+     */
+    @PostMapping("/totp/verify")
+    public ResponseEntity<Map<String, Object>> verifyAndEnableTotp(
+            @Valid @RequestBody TotpVerifyRequest req,
+            Authentication authentication,
+            HttpServletRequest http) {
+        try {
+            String uid = authentication.getName();
+            log.info("TOTP verification requested by user: {}", uid);
+
+            boolean success = userService.verifyAndEnableTotp(uid, req.getCode());
+
+            if (success) {
+                audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
+                    Map.of("action", "totp_enabled"));
+                return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "TOTP enabled successfully"
+                ));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+                    "success", false,
+                    "message", "Invalid TOTP code"
+                ));
+            }
+        } catch (Exception e) {
+            log.error("Error verifying TOTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "success", false,
+                "message", e.getMessage()
+            ));
+        }
+    }
+
+    /**
+     * Deshabilita TOTP para el usuario (requiere código válido para confirmar)
+     */
+    @PostMapping("/totp/disable")
+    public ResponseEntity<Map<String, Object>> disableTotp(
+            @Valid @RequestBody TotpVerifyRequest req,
+            Authentication authentication,
+            HttpServletRequest http) {
+        try {
+            String uid = authentication.getName();
+            log.info("TOTP disable requested by user: {}", uid);
+
+            boolean success = userService.disableTotp(uid, req.getCode());
+
+            if (success) {
+                audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
+                    Map.of("action", "totp_disabled"));
+                return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "TOTP disabled successfully"
+                ));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+                    "success", false,
+                    "message", "Invalid TOTP code"
+                ));
+            }
+        } catch (Exception e) {
+            log.error("Error disabling TOTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "success", false,
+                "message", e.getMessage()
+            ));
+        }
+    }
+
+    /**
+     * Login con verificación TOTP (segunda etapa del login)
+     * Se llama después del login normal cuando el usuario tiene TOTP habilitado
+     */
+    @PostMapping("/login/totp")
+    public ResponseEntity<LoginResponse> loginWithTotp(@Valid @RequestBody TotpVerifyRequest req,
+                                                       @RequestParam String uid,
+                                                       HttpServletRequest http) {
+        try {
+            log.info("TOTP login verification for user: {}", uid);
+
+            LoginResponse response = userService.loginWithTotp(uid, req.getCode());
+
+            audit.log(uid, uid, AuditAction.LOGIN, http,
+                Map.of("method", "totp"));
+
+            log.info("Login with TOTP successful for user: {}", uid);
+            return ResponseEntity.ok(response);
+
+        } catch (UserProfileService.LoginFailedException e) {
+            log.warn("TOTP login failed for user: {} - Reason: {}", uid, e.getReason());
+
+            Map<String, Object> meta = Map.of(
+                "uid", uid,
+                "reason", e.getReason(),
+                "message", e.getMessage()
+            );
+
+            try {
+                audit.log(uid, uid, AuditAction.LOGIN_FAILED, http, meta);
+            } catch (Exception auditException) {
+                log.error("Failed to log audit for failed TOTP login", auditException);
+            }
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        } catch (Exception e) {
+            log.error("Unexpected error during TOTP login for user: {}", uid, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * Consulta si el usuario tiene TOTP habilitado
+     */
+    @GetMapping("/totp/status")
+    public ResponseEntity<Map<String, Boolean>> getTotpStatus(Authentication authentication) {
+        try {
+            String uid = authentication.getName();
+            boolean enabled = userService.getTotpEnabled(uid);
+            return ResponseEntity.ok(Map.of("totpEnabled", enabled));
+        } catch (Exception e) {
+            log.error("Error getting TOTP status", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    // ==================== ENDPOINTS BIOMETRÍA ====================
 
     // DTO para preferencia biométrica
     class BiometricPreferenceDto {

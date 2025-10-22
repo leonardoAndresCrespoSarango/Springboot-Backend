@@ -93,6 +93,13 @@
             <artifactId>spring-dotenv</artifactId>
             <version>4.0.0</version>
         </dependency>
+
+        <!-- TOTP (Time-based One-Time Password) para Google Authenticator -->
+        <dependency>
+            <groupId>dev.samstevens.totp</groupId>
+            <artifactId>totp</artifactId>
+            <version>1.7.1</version>
+        </dependency>
     </dependencies>
 
     <build>

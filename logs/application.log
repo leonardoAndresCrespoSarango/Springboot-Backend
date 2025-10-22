@@ -1,9 +1,4 @@
-2025-10-21 00:02:59.693 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
-2025-10-21 00:02:59.727 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
-2025-10-21 00:03:00.686 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
-2025-10-21 00:03:00.949 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
-2025-10-21 00:03:08.558 ERROR [http-nio-8002-exec-5] c.e.u.e.GlobalExceptionHandler - Runtime exception occurred: Type definition error: [simple type, class com.etikos.user.controller.UserController$BiometricPreferenceDto]
-2025-10-21 00:03:38.636 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
-2025-10-21 00:03:38.636 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
-2025-10-21 00:03:38.878 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
-2025-10-21 00:03:39.229 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-22 00:00:54.636 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-22 00:00:54.642 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-22 00:00:54.884 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-22 00:00:55.258 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login successful for email: leonardo@example.com

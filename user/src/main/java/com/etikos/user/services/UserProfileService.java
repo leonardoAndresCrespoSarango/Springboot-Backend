@@ -27,10 +27,12 @@ public class UserProfileService {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final TotpService totpService;
 
-    public UserProfileService(PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public UserProfileService(PasswordEncoder passwordEncoder, JwtService jwtService, TotpService totpService) {
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.totpService = totpService;
     }
 
     public UserProfileDto register(RegisterRequest req) throws ExecutionException, InterruptedException {
@@ -73,6 +75,8 @@ public class UserProfileService {
         userData.put("createdAt", com.google.cloud.Timestamp.now());
         userData.put("updatedAt", com.google.cloud.Timestamp.now());
         userData.put("biometricEnabled", false); // Nuevo campo para biometría
+        userData.put("totpEnabled", false); // Campo para TOTP (Google Authenticator)
+        userData.put("totpSecret", null); // Secreto TOTP (se genera cuando se habilita)
 
         db.collection("users").document(uid).set(userData).get();
 
@@ -111,7 +115,23 @@ public class UserProfileService {
             throw new LoginFailedException("Invalid email or password", "INVALID_PASSWORD");
         }
 
-        // Generar token JWT
+        // Verificar si el usuario tiene TOTP habilitado
+        Boolean totpEnabled = userDoc.getBoolean("totpEnabled");
+        if (totpEnabled != null && totpEnabled) {
+            // Si tiene TOTP habilitado, no generar token aún, requerir código TOTP
+            log.info("TOTP required for user: {}", req.getEmail());
+
+            String uid = userDoc.getString("uid");
+            LoginResponse response = new LoginResponse();
+            response.setTotpRequired(true);
+            response.setTempSessionId(uid); // Usar el UID como identificador temporal
+            response.setUser(documentToDto(userDoc));
+            // No se envía token aún
+
+            return response;
+        }
+
+        // Si no tiene TOTP, generar token JWT normalmente
         String uid = userDoc.getString("uid");
         String username = userDoc.getString("username");
         String role = userDoc.getString("role");
@@ -123,6 +143,7 @@ public class UserProfileService {
         LoginResponse response = new LoginResponse();
         response.setToken(token);
         response.setUser(documentToDto(userDoc));
+        response.setTotpRequired(false);
 
         return response;
     }
@@ -248,6 +269,8 @@ public class UserProfileService {
         dto.setRole(doc.getString("role"));
         Boolean biometricEnabled = doc.getBoolean("biometricEnabled");
         dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
+        Boolean totpEnabled = doc.getBoolean("totpEnabled");
+        dto.setTotpEnabled(totpEnabled != null && totpEnabled);
         return dto;
     }
 
@@ -261,7 +284,236 @@ public class UserProfileService {
         dto.setRole((String) data.get("role"));
         Boolean biometricEnabled = (Boolean) data.get("biometricEnabled");
         dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
+        Boolean totpEnabled = (Boolean) data.get("totpEnabled");
+        dto.setTotpEnabled(totpEnabled != null && totpEnabled);
         return dto;
+    }
+
+    // ==================== MÉTODOS TOTP ====================
+
+    /**
+     * Inicia la configuración de TOTP para un usuario.
+     * Genera un secreto y devuelve el QR code para escanear con Google Authenticator
+     */
+    public Map<String, String> setupTotp(String uid) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot doc = db.collection("users").document(uid).get().get();
+
+        if (!doc.exists()) {
+            throw new RuntimeException("User not found");
+        }
+
+        String email = doc.getString("email");
+
+        // Generar un nuevo secreto TOTP
+        String secret = totpService.generateSecret();
+
+        // Generar QR code
+        String qrCodeDataUri = totpService.generateQrCodeDataUri(secret, email);
+
+        // Guardar el secreto temporalmente (aún no habilitado)
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("totpSecret", secret);
+        updates.put("updatedAt", com.google.cloud.Timestamp.now());
+        db.collection("users").document(uid).update(updates).get();
+
+        log.info("TOTP setup initiated for user: {}", uid);
+
+        Map<String, String> result = new HashMap<>();
+        result.put("secret", secret);
+        result.put("qrCodeDataUri", qrCodeDataUri);
+
+        return result;
+    }
+
+    /**
+     * Verifica el código TOTP y habilita TOTP para el usuario si es correcto
+     */
+    public boolean verifyAndEnableTotp(String uid, String code) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot doc = db.collection("users").document(uid).get().get();
+
+        if (!doc.exists()) {
+            throw new RuntimeException("User not found");
+        }
+
+        String secret = doc.getString("totpSecret");
+        if (secret == null || secret.isEmpty()) {
+            throw new RuntimeException("TOTP not set up. Please call setup first.");
+        }
+
+        // Verificar el código TOTP
+        boolean isValid = totpService.verifyCodeWithWindow(secret, code);
+
+        if (isValid) {
+            // Habilitar TOTP
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("totpEnabled", true);
+            updates.put("updatedAt", com.google.cloud.Timestamp.now());
+            db.collection("users").document(uid).update(updates).get();
+
+            log.info("TOTP enabled successfully for user: {}", uid);
+            return true;
+        } else {
+            log.warn("Invalid TOTP code for user: {}", uid);
+            return false;
+        }
+    }
+
+    /**
+     * Deshabilita TOTP para un usuario (requiere verificación del código actual)
+     */
+    public boolean disableTotp(String uid, String code) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot doc = db.collection("users").document(uid).get().get();
+
+        if (!doc.exists()) {
+            throw new RuntimeException("User not found");
+        }
+
+        Boolean totpEnabled = doc.getBoolean("totpEnabled");
+        if (totpEnabled == null || !totpEnabled) {
+            throw new RuntimeException("TOTP is not enabled for this user");
+        }
+
+        String secret = doc.getString("totpSecret");
+
+        // Verificar el código antes de deshabilitar
+        boolean isValid = totpService.verifyCodeWithWindow(secret, code);
+
+        if (isValid) {
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("totpEnabled", false);
+            updates.put("totpSecret", null); // Eliminar el secreto por seguridad
+            updates.put("updatedAt", com.google.cloud.Timestamp.now());
+            db.collection("users").document(uid).update(updates).get();
+
+            log.info("TOTP disabled successfully for user: {}", uid);
+            return true;
+        } else {
+            log.warn("Invalid TOTP code when trying to disable for user: {}", uid);
+            return false;
+        }
+    }
+
+    /**
+     * Login con verificación TOTP
+     * Este método se llama después del login normal cuando el usuario tiene TOTP habilitado
+     */
+    public LoginResponse loginWithTotp(String uid, String totpCode) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot userDoc = db.collection("users").document(uid).get().get();
+
+        if (!userDoc.exists()) {
+            throw new LoginFailedException("User not found", "USER_NOT_FOUND");
+        }
+
+        Boolean totpEnabled = userDoc.getBoolean("totpEnabled");
+        if (totpEnabled == null || !totpEnabled) {
+            throw new RuntimeException("TOTP is not enabled for this user");
+        }
+
+        String secret = userDoc.getString("totpSecret");
+        if (secret == null || secret.isEmpty()) {
+            throw new RuntimeException("TOTP secret not found");
+        }
+
+        // Verificar el código TOTP
+        boolean isValid = totpService.verifyCodeWithWindow(secret, totpCode);
+
+        if (!isValid) {
+            log.warn("Invalid TOTP code for user: {}", uid);
+            throw new LoginFailedException("Invalid TOTP code", "INVALID_TOTP");
+        }
+
+        // Código TOTP válido, generar token JWT
+        String username = userDoc.getString("username");
+        String role = userDoc.getString("role");
+        String token = jwtService.generateToken(username, role, uid);
+
+        log.info("Login with TOTP successful for user: {}", uid);
+
+        LoginResponse response = new LoginResponse();
+        response.setToken(token);
+        response.setUser(documentToDto(userDoc));
+        response.setTotpRequired(false);
+
+        return response;
+    }
+
+    /**
+     * Obtiene el estado de TOTP para un usuario
+     */
+    public boolean getTotpEnabled(String uid) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot doc = db.collection("users").document(uid).get().get();
+
+        if (!doc.exists()) {
+            throw new RuntimeException("User not found");
+        }
+
+        Boolean enabled = doc.getBoolean("totpEnabled");
+        return enabled != null && enabled;
+    }
+
+    /**
+     * Login con biometría - También verifica si requiere TOTP
+     * El frontend ya validó la identidad biométrica, aquí solo generamos el token
+     * o solicitamos TOTP si está habilitado
+     */
+    public LoginResponse loginWithBiometric(String uid) throws Exception {
+        log.info("Biometric login attempt for user: {}", uid);
+
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot userDoc = db.collection("users").document(uid).get().get();
+
+        if (!userDoc.exists()) {
+            log.warn("Biometric login failed: User not found: {}", uid);
+            throw new LoginFailedException("User not found", "USER_NOT_FOUND");
+        }
+
+        // Verificar si está bloqueado
+        Boolean disabled = userDoc.getBoolean("disabled");
+        if (disabled != null && disabled) {
+            log.warn("Biometric login failed: Account disabled for user: {}", uid);
+            throw new LoginFailedException("User account is disabled", "ACCOUNT_DISABLED");
+        }
+
+        // Verificar si el usuario tiene biometría habilitada
+        Boolean biometricEnabled = userDoc.getBoolean("biometricEnabled");
+        if (biometricEnabled == null || !biometricEnabled) {
+            log.warn("Biometric login failed: Biometric not enabled for user: {}", uid);
+            throw new LoginFailedException("Biometric authentication not enabled", "BIOMETRIC_NOT_ENABLED");
+        }
+
+        // Verificar si el usuario tiene TOTP habilitado
+        Boolean totpEnabled = userDoc.getBoolean("totpEnabled");
+        if (totpEnabled != null && totpEnabled) {
+            // Si tiene TOTP habilitado, no generar token aún, requerir código TOTP
+            log.info("TOTP required for biometric login - user: {}", uid);
+
+            LoginResponse response = new LoginResponse();
+            response.setTotpRequired(true);
+            response.setTempSessionId(uid);
+            response.setUser(documentToDto(userDoc));
+            // No se envía token aún
+
+            return response;
+        }
+
+        // Si no tiene TOTP, generar token JWT normalmente
+        String username = userDoc.getString("username");
+        String role = userDoc.getString("role");
+        String token = jwtService.generateToken(username, role, uid);
+
+        log.info("Biometric login successful for user: {}", uid);
+
+        LoginResponse response = new LoginResponse();
+        response.setToken(token);
+        response.setUser(documentToDto(userDoc));
+        response.setTotpRequired(false);
+
+        return response;
     }
 
     // Excepción personalizada para login fallido

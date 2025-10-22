@@ -36,6 +36,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/users/register",
                                 "/users/login",
+                                "/users/login/biometric",
+                                "/users/login/totp",
                                 "/users/password-reset",
                                 "/users/audit/logout",
                                 "/users/audit/login-failed"
