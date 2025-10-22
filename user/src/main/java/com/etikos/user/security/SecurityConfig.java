@@ -40,7 +40,10 @@ public class SecurityConfig {
                                 "/users/login/totp",
                                 "/users/password-reset",
                                 "/users/audit/logout",
-                                "/users/audit/login-failed"
+                                "/users/audit/login-failed",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
