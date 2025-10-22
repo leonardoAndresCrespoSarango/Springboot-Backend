@@ -107,7 +107,7 @@ public class UserController {
             // Si no requiere TOTP, auditar login exitoso
             if (!response.isTotpRequired()) {
                 audit.log(uid, uid, AuditAction.LOGIN, http,
-                    Map.of("method", "biometric"));
+                        Map.of("method", "biometric"));
             }
 
             log.info("Biometric login successful for user: {}", uid);
@@ -237,12 +237,12 @@ public class UserController {
             Map<String, String> setup = userService.setupTotp(uid);
 
             TotpSetupResponse response = new TotpSetupResponse(
-                setup.get("secret"),
-                setup.get("qrCodeDataUri")
+                    setup.get("secret"),
+                    setup.get("qrCodeDataUri")
             );
 
             audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
-                Map.of("action", "totp_setup_initiated"));
+                    Map.of("action", "totp_setup_initiated"));
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -267,22 +267,22 @@ public class UserController {
 
             if (success) {
                 audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
-                    Map.of("action", "totp_enabled"));
+                        Map.of("action", "totp_enabled"));
                 return ResponseEntity.ok(Map.of(
-                    "success", true,
-                    "message", "TOTP enabled successfully"
+                        "success", true,
+                        "message", "TOTP enabled successfully"
                 ));
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-                    "success", false,
-                    "message", "Invalid TOTP code"
+                        "success", false,
+                        "message", "Invalid TOTP code"
                 ));
             }
         } catch (Exception e) {
             log.error("Error verifying TOTP", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
-                "success", false,
-                "message", e.getMessage()
+                    "success", false,
+                    "message", e.getMessage()
             ));
         }
     }
@@ -303,22 +303,22 @@ public class UserController {
 
             if (success) {
                 audit.log(uid, uid, AuditAction.CREDENTIALS_UPDATED, http,
-                    Map.of("action", "totp_disabled"));
+                        Map.of("action", "totp_disabled"));
                 return ResponseEntity.ok(Map.of(
-                    "success", true,
-                    "message", "TOTP disabled successfully"
+                        "success", true,
+                        "message", "TOTP disabled successfully"
                 ));
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-                    "success", false,
-                    "message", "Invalid TOTP code"
+                        "success", false,
+                        "message", "Invalid TOTP code"
                 ));
             }
         } catch (Exception e) {
             log.error("Error disabling TOTP", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
-                "success", false,
-                "message", e.getMessage()
+                    "success", false,
+                    "message", e.getMessage()
             ));
         }
     }
@@ -337,7 +337,7 @@ public class UserController {
             LoginResponse response = userService.loginWithTotp(uid, req.getCode());
 
             audit.log(uid, uid, AuditAction.LOGIN, http,
-                Map.of("method", "totp"));
+                    Map.of("method", "totp"));
 
             log.info("Login with TOTP successful for user: {}", uid);
             return ResponseEntity.ok(response);
@@ -346,9 +346,9 @@ public class UserController {
             log.warn("TOTP login failed for user: {} - Reason: {}", uid, e.getReason());
 
             Map<String, Object> meta = Map.of(
-                "uid", uid,
-                "reason", e.getReason(),
-                "message", e.getMessage()
+                    "uid", uid,
+                    "reason", e.getReason(),
+                    "message", e.getMessage()
             );
 
             try {
