@@ -34,5 +34,5 @@ build/
 microservicios/.idea
 logs/
 **/firebase-service-account.json
-src/main/resources/*.json
-src/main/resources/.env
+**/**/**/*.json
+**/**/**/.env
