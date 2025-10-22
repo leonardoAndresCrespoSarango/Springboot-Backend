@@ -7,9 +7,9 @@ public class UserProfileDto {
     private String name;
     private String lastname;
     private String role; // "CUSTOMER" o "ADMIN"
+    private boolean disabled;
     private boolean biometricEnabled; // Indica si el usuario tiene biometría habilitada
     private boolean totpEnabled; // Indica si el usuario tiene TOTP habilitado
-
     public String getUid() {
         return uid;
     }
@@ -58,6 +58,14 @@ public class UserProfileDto {
         this.role = role;
     }
 
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
     public boolean isBiometricEnabled() {
         return biometricEnabled;
     }
@@ -73,4 +81,5 @@ public class UserProfileDto {
     public void setTotpEnabled(boolean totpEnabled) {
         this.totpEnabled = totpEnabled;
     }
+
 }

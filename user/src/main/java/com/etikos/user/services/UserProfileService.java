@@ -267,6 +267,8 @@ public class UserProfileService {
         dto.setName(doc.getString("name"));
         dto.setLastname(doc.getString("lastname"));
         dto.setRole(doc.getString("role"));
+        Boolean disabled = doc.getBoolean("disabled");
+        dto.setDisabled(disabled != null && disabled);
         Boolean biometricEnabled = doc.getBoolean("biometricEnabled");
         dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
         Boolean totpEnabled = doc.getBoolean("totpEnabled");
@@ -282,6 +284,8 @@ public class UserProfileService {
         dto.setName((String) data.get("name"));
         dto.setLastname((String) data.get("lastname"));
         dto.setRole((String) data.get("role"));
+        Boolean disabled = (Boolean) data.get("disabled");
+        dto.setDisabled(disabled != null && disabled);
         Boolean biometricEnabled = (Boolean) data.get("biometricEnabled");
         dto.setBiometricEnabled(biometricEnabled != null && biometricEnabled);
         Boolean totpEnabled = (Boolean) data.get("totpEnabled");
