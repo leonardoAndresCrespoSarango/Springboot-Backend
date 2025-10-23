@@ -1,0 +1,66 @@
+services:
+  # Microservicio de Usuarios (Firebase + JWT)
+  user-service:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    container_name: etikos-user-service
+    ports:
+      - "8002:8002"
+    environment:
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - JWT_SECRET=${JWT_SECRET}
+      - AUDIT_SERVICE_BASE_URL=http://second-stack-service:8003
+      - JAVA_OPTS=-Xmx512m -Xms256m
+      # Si usas un archivo de credenciales fuera del classpath:
+      # - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/firebase-service-account.json
+      # - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      # Si tu app espera el JSON por ruta (NO por classpath):
+      - ./user/src/main/resources/firebase-service-account.json:/app/secrets/firebase-service-account.json:ro
+      # Logs opcional
+      - ./logs:/app/logs
+    networks:
+      - etikos-network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8002/actuator/health | grep -q '\"status\":\"UP\"'" ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    depends_on:
+      second-stack-service:
+        condition: service_healthy
+
+  # Microservicio Second Stack (PostgreSQL/Supabase)
+  second-stack-service:
+    build:
+      context: ./second_stack
+      dockerfile: Dockerfile
+    container_name: etikos-second-stack-service
+    ports:
+      - "8003:8003"
+    environment:
+      - SUPABASE_JDBC_URL=${SUPABASE_JDBC_URL}
+      - JAVA_OPTS=-Xmx512m -Xms256m
+      # - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - etikos-network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8003/actuator/health | grep -q '\"status\":\"UP\"'" ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+
+networks:
+  etikos-network:
+    driver: bridge
+    name: etikos-backend-network
+
+volumes:
+  logs-data:
+    driver: local
