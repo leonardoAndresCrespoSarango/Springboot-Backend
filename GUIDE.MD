@@ -61,7 +61,7 @@ Copia el link que aparece en la terminal (forwarding) y lo utilizalo en los envi
 Se creo un archivo `docker-compose-yaml` dentro del directorio raiz para que el despleigue sea mas facil.
 
 Se aplicaro metodos como health checker para que el backend se inicie solo cuando todos los servicios esten listos.
-```javascript
+```yml
 healthcheck:
     test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8003/actuator/health | grep -q '\"status\":\"UP\"'" ]
     interval: 20s
@@ -71,3 +71,20 @@ healthcheck:
 ```
 Para mayor informacion consulta el archivo `DOCKER_GUIDE.md` 
 ## Frontend
+Ten a la mano la URL del tunel que generaste en el paso 3 de la seccion anterior.
+
+Copialo en el archivo `src/environments/environment.ts` y `src/environments/environment.prod.ts`
+```javascript
+export const environment = {
+  production: false,
+  apiUrl: 'https://ecc233eae7a8.ngrok-free.app/users'
+};
+```
+Cambia `https://ecc233eae7a8.ngrok-free.app` por la URL que generaste con NGROK, pero manteniendo el prefix `/users` al final.
+
+Al ser una aplicación de IONIC se debera iniciar mediante el comando `ionic serve`
+
+Para dispositivos moviles se debera ejecutar el comando `npx cap sync android` o `npx cap sync ios` depende delo que se desee ejecutar,
+ y luego se debera ejecutar el comando `npx cap run android` o `npx cap run android` para ejecutar la aplicacion en el dispositivo.
+
+Ante dudas consulta la documentacion oficial de IONIC: https://capacitorjs.com/docs/android o el archivo `README.md` dentro del repositorio Frontend.
