@@ -72,6 +72,18 @@ mvnw.cmd spring-boot:run
 
 El microservicio queda disponible en `http://localhost:8003`.
 
+## Documentacion OpenAPI y Swagger UI
+- Con el servicio activo accede a `http://localhost:8003/swagger-ui/index.html` para probar los endpoints con Swagger UI.
+- El descriptor JSON de OpenAPI vive en `http://localhost:8003/v3/api-docs`; consumelo desde clientes como Postman, Hoppscotch o Insomnia.
+- Refleja cambios contractuales en `openapi.yaml` y comunicalos al resto de equipos para mantener la version alineada.
+
+## Dockerizacion
+- Desde la carpeta `microservices` ejecuta `docker compose build second-stack-service` para construir la imagen a partir del `Dockerfile`.
+- Declara `SUPABASE_JDBC_URL` (y, si los usas, `SUPABASE_DB_*`) en `.env`; Docker Compose los inyecta automaticamente.
+- Asegura que la URL JDBC sea accesible desde el contenedor (VPN, IP publica o tunel) antes de levantarlo.
+- Inicia el contenedor con `docker compose up second-stack-service` o todo el stack con `docker compose up`; el puerto 8003 queda publicado en tu host.
+- Ajusta el volumen de logs o perfiles en `docker-compose.yml` si necesitas mas persistencia.
+
 ## 🗃️ Modelo de datos (PostgreSQL)
 | Campo | Tipo | Descripción |
 |-------|------|-------------|

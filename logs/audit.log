@@ -815,3 +815,4 @@ org.springframework.web.client.HttpServerErrorException$InternalServerError: 500
 2025-10-23 06:00:36.130 INFO  [http-nio-0.0.0.0-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
 2025-10-23 06:01:09.859 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
 2025-10-23 06:05:49.500 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 06:30:32.630 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1

@@ -967,3 +967,11 @@ Caused by: org.springframework.web.client.HttpServerErrorException$InternalServe
 2025-10-23 06:05:48.647 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
 2025-10-23 06:05:49.140 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
 2025-10-23 06:05:49.500 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 06:29:15.439 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 06:29:15.746 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 06:29:15.750 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 06:29:29.870 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 16.992 seconds (process running for 19.025)
+2025-10-23 06:30:28.422 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 06:30:28.423 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 06:30:31.838 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 06:30:32.631 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com

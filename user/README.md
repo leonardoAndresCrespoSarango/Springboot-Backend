@@ -65,6 +65,18 @@ mvnw.cmd spring-boot:run
 
 El servicio queda disponible en `http://localhost:8002`.
 
+## Documentacion OpenAPI y Swagger UI
+- Con la aplicacion en marcha abre `http://localhost:8002/swagger-ui/index.html` para explorar la API de forma interactiva.
+- El JSON de OpenAPI queda expuesto en `http://localhost:8002/v3/api-docs`; importa la URL en Postman, Insomnia u otra herramienta.
+- Mantiene sincronizado el archivo `openapi.yaml` en la raiz del repositorio cuando anadas o modifiques endpoints.
+
+## Dockerizacion
+- Desde la carpeta `microservices` ejecuta `docker compose build user-service` para generar la imagen con el `Dockerfile` incluido.
+- Define `FIREBASE_PROJECT_ID`, `JWT_SECRET` y `AUDIT_SERVICE_BASE_URL` en `.env`; Docker Compose los inyecta como variables de entorno.
+- Monta `firebase-service-account.json` si lo mantienes fuera del classpath (ver volumen configurado en `docker-compose.yml`).
+- Levanta el contenedor con `docker compose up user-service` (o todo el stack con `docker compose up`) y accede via `http://localhost:8002`.
+- Los logs del contenedor pueden mapearse a `./logs`; ajusta el volumen si prefieres otra ruta local.
+
 ## 🗃️ Modelo de datos (Firestore)
 
 ### Colección `users`
