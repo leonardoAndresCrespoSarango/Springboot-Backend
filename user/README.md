@@ -43,6 +43,11 @@ spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.ser
 
 audit.service.base-url=${AUDIT_SERVICE_BASE_URL}
 ```
+**Generar un secret seguro:** jwt.secret=TU_SECRET_SEGURO_MINIMO_256_BITS
+```powershell
+# Windows PowerShell
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Minimum 0 -Maximum 256 }))
+```
 
 ### 4. Orígenes CORS permitidos
 Modifica la lista en `user/src/main/java/com/etikos/user/config/CorsConfig.java` para reflejar los dominios front-end autorizados (Angular/Ionic, apps móviles, etc.).
