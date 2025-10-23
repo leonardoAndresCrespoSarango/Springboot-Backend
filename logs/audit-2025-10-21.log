@@ -1,0 +1,13 @@
+2025-10-21 00:03:00.947 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-21 00:03:39.228 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-21 23:16:01.296 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:21:30.628 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:27:05.572 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:28:44.392 INFO  [http-nio-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:30:07.734 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:33:08.229 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:34:14.639 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:37:17.018 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:57:33.998 INFO  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:58:26.473 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-21 23:58:39.337 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252

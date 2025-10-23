@@ -1,0 +1,35 @@
+2025-10-20 21:53:32.161 WARN  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: lcresposarango@gmail.com | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:54:05.355 WARN  [http-nio-8002-exec-5] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: lcresposarango@gmail.com | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:55:47.146 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - 📝 USER REGISTERED - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:55:58.462 WARN  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: lcresposarango@gmail.com | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:56:05.915 WARN  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: lcresposarango@gmail.com | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:56:23.321 WARN  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: leonardo@example.com | Reason: INVALID_PASSWORD | IP: 0:0:0:0:0:0:0:1
+2025-10-20 21:56:35.841 INFO  [http-nio-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:11:40.696 WARN  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: dfsdf@gmail.com | Reason: USER_NOT_FOUND | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:12:17.238 INFO  [http-nio-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:12:25.730 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:14:33.538 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:14:34.999 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:32:17.748 INFO  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:32:38.540 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:33:41.116 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:35:41.967 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:35:47.989 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:36:43.879 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:37:38.343 INFO  [http-nio-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:37:43.395 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:50:50.874 INFO  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 22:50:55.388 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
+2025-10-20 23:04:30.082 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.71
+2025-10-20 23:08:18.025 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:10:36.161 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:14:47.647 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:15:41.563 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:19:18.156 INFO  [http-nio-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:33:20.712 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:34:32.217 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:44:20.627 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:48:11.434 INFO  [http-nio-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:52:00.721 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:52:56.145 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107
+2025-10-20 23:54:05.686 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.18.107

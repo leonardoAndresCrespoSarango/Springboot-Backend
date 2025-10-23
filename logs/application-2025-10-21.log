@@ -1,0 +1,61 @@
+2025-10-21 00:02:59.693 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 00:02:59.727 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 00:03:00.686 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 00:03:00.949 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 00:03:08.558 ERROR [http-nio-8002-exec-5] c.e.u.e.GlobalExceptionHandler - Runtime exception occurred: Type definition error: [simple type, class com.etikos.user.controller.UserController$BiometricPreferenceDto]
+2025-10-21 00:03:38.636 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 00:03:38.636 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 00:03:38.878 INFO  [http-nio-8002-exec-7] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 00:03:39.229 INFO  [http-nio-8002-exec-7] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 22:55:34.283 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-21 22:55:34.342 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication using Java 25 with PID 31464 (D:\ETIKOS\backend\microservices\user\target\classes started by lcres in D:\ETIKOS\backend\microservices)
+2025-10-21 22:55:34.343 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-21 22:55:36.316 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.979 seconds (process running for 4.087)
+2025-10-21 22:57:26.051 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-21 22:57:26.081 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication using Java 25 with PID 39772 (D:\ETIKOS\backend\microservices\user\target\classes started by lcres in D:\ETIKOS\backend\microservices)
+2025-10-21 22:57:26.081 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-21 22:57:27.568 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.023 seconds (process running for 3.063)
+2025-10-21 23:15:21.741 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-21 23:15:21.779 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication using Java 25 with PID 28560 (D:\ETIKOS\backend\microservices\user\target\classes started by lcres in D:\ETIKOS\backend\microservices)
+2025-10-21 23:15:21.780 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-21 23:15:23.785 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.578 seconds (process running for 3.445)
+2025-10-21 23:15:57.228 INFO  [http-nio-8002-exec-3] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:15:57.228 INFO  [http-nio-8002-exec-3] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:16:01.023 INFO  [http-nio-8002-exec-3] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:16:01.296 INFO  [http-nio-8002-exec-3] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:21:29.488 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:21:29.489 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:21:30.391 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:21:30.629 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:27:04.393 INFO  [http-nio-8002-exec-9] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:27:04.395 INFO  [http-nio-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:27:05.335 INFO  [http-nio-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:27:05.573 INFO  [http-nio-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:28:43.775 INFO  [http-nio-8002-exec-10] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:28:43.775 INFO  [http-nio-8002-exec-10] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:28:44.038 INFO  [http-nio-8002-exec-10] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:28:44.392 INFO  [http-nio-8002-exec-10] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:30:07.139 INFO  [http-nio-8002-exec-2] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:30:07.139 INFO  [http-nio-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:30:07.421 INFO  [http-nio-8002-exec-2] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:30:07.735 INFO  [http-nio-8002-exec-2] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:33:07.599 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:33:07.600 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:33:07.858 INFO  [http-nio-8002-exec-4] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:33:08.230 INFO  [http-nio-8002-exec-4] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:34:14.021 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:34:14.021 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:34:14.269 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:34:14.639 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:37:16.401 INFO  [http-nio-8002-exec-9] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:37:16.401 INFO  [http-nio-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:37:16.649 INFO  [http-nio-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-21 23:37:17.018 INFO  [http-nio-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-21 23:57:32.223 INFO  [http-nio-8002-exec-1] c.e.user.controller.UserController - TOTP setup requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-21 23:57:33.555 INFO  [http-nio-8002-exec-1] c.e.user.services.UserProfileService - TOTP setup initiated for user: 3itilAKm9QTM11vrn1G9
+2025-10-21 23:58:25.698 INFO  [http-nio-8002-exec-3] c.e.user.controller.UserController - TOTP verification requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-21 23:58:26.298 INFO  [http-nio-8002-exec-3] c.e.user.services.UserProfileService - TOTP enabled successfully for user: 3itilAKm9QTM11vrn1G9
+2025-10-21 23:58:38.683 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-21 23:58:38.683 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-21 23:58:38.982 INFO  [http-nio-8002-exec-6] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-21 23:58:39.337 INFO  [http-nio-8002-exec-6] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
