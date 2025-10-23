@@ -1157,3 +1157,77 @@ Caused by: org.springframework.web.client.HttpServerErrorException$InternalServe
 2025-10-23 15:20:00.868 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
 2025-10-23 15:20:01.162 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
 2025-10-23 15:20:01.503 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 15:26:18.418 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 15:26:18.474 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 6 (/app/app.jar started by spring in /app)
+2025-10-23 15:26:18.475 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 15:26:22.096 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 4.304 seconds (process running for 5.513)
+2025-10-23 15:26:22.158 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 15:26:24.459 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 15:31:20.186 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 15:31:20.580 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 7 (/app/app.jar started by spring in /app)
+2025-10-23 15:31:20.604 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 15:31:51.692 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 35.51 seconds (process running for 45.834)
+2025-10-23 15:31:52.864 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 15:32:08.167 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 16:02:52.601 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 16:02:52.651 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 6 (/app/app.jar started by spring in /app)
+2025-10-23 16:02:52.653 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 16:02:54.299 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.988 seconds (process running for 2.477)
+2025-10-23 16:02:54.351 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 16:02:56.115 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 16:04:09.785 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 16:04:09.788 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 16:04:10.045 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 16:04:10.806 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 16:04:29.931 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 16:04:29.932 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 16:04:30.261 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 16:04:30.597 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 16:18:36.920 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 16:18:36.957 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 7 (/app/app.jar started by spring in /app)
+2025-10-23 16:18:36.958 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 16:18:39.237 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.66 seconds (process running for 3.124)
+2025-10-23 16:18:39.282 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 16:18:41.246 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 16:18:42.057 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 16:18:42.057 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 16:18:42.309 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 16:18:42.887 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 16:18:57.259 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login request received for email: admin@example.com
+2025-10-23 16:18:57.262 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login attempt for email: admin@example.com
+2025-10-23 16:18:57.451 WARN  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login failed: User not found with email: admin@example.com
+2025-10-23 16:18:57.452 WARN  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login failed for email: admin@example.com - Reason: USER_NOT_FOUND
+2025-10-23 16:19:23.810 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login request received for email: admin@example.com
+2025-10-23 16:19:23.812 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: admin@example.com
+2025-10-23 16:19:23.988 WARN  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login failed: User not found with email: admin@example.com
+2025-10-23 16:19:23.989 WARN  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login failed for email: admin@example.com - Reason: USER_NOT_FOUND
+2025-10-23 16:19:35.963 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 16:19:35.964 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 16:19:36.270 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 16:19:36.482 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 16:24:10.869 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 16:24:10.872 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 16:24:11.788 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 16:24:12.182 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 16:24:18.018 INFO  [http-nio-0.0.0.0-8002-exec-6] c.e.user.controller.UserController - User logout: 9lUru6FC3t6ibKrGBkp7
+2025-10-23 16:26:36.661 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 16:26:36.697 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 7 (/app/app.jar started by spring in /app)
+2025-10-23 16:26:36.699 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 16:26:39.057 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.828 seconds (process running for 3.261)
+2025-10-23 16:26:39.103 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 16:26:40.460 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 16:26:59.156 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 16:26:59.159 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 16:26:59.442 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 16:26:59.947 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 16:27:02.058 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - User logout: 9lUru6FC3t6ibKrGBkp7
+2025-10-23 18:28:14.843 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 18:28:14.909 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 8 (/app/app.jar started by spring in /app)
+2025-10-23 18:28:14.910 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 18:28:18.367 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 3.985 seconds (process running for 4.374)
+2025-10-23 18:28:18.439 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 18:28:20.762 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 18:37:52.919 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 18:37:52.922 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 18:37:54.018 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 18:37:54.738 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: admin@etikos.com

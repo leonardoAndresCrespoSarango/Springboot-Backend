@@ -827,3 +827,14 @@ org.springframework.web.client.HttpServerErrorException$InternalServerError: 500
 2025-10-23 15:19:32.045 INFO  [http-nio-0.0.0.0-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
 2025-10-23 15:19:42.065 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
 2025-10-23 15:20:01.501 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 66.231.65.198
+2025-10-23 16:04:10.805 INFO  [http-nio-0.0.0.0-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 16:04:30.596 INFO  [http-nio-0.0.0.0-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 66.231.65.198
+2025-10-23 16:18:42.886 INFO  [http-nio-0.0.0.0-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.65.1
+2025-10-23 16:18:57.806 WARN  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: admin@example.com | Reason: USER_NOT_FOUND | IP: 192.168.65.1
+2025-10-23 16:19:24.329 WARN  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: admin@example.com | Reason: USER_NOT_FOUND | IP: 192.168.65.1
+2025-10-23 16:19:36.481 INFO  [http-nio-0.0.0.0-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 16:24:12.179 INFO  [http-nio-0.0.0.0-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 16:24:18.418 INFO  [http-nio-0.0.0.0-8002-exec-6] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 16:26:59.945 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 16:27:02.349 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - 👋 LOGOUT - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 18:37:54.736 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1

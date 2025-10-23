@@ -1,35 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AgentMigrationStateService">
+    <option name="migrationStatus" value="IN_PROGRESS" />
     <option name="pendingSessionIds">
+      <option value="2f35fa2f-074f-4337-8abb-e804975a9f59" />
+      <option value="459bdf0a-f121-4b94-b850-50d785cc1212" />
       <option value="5cf9ef1e-33a9-45ec-80a6-e730507c55e9" />
+      <option value="97bf5e88-3981-4de8-b10c-1670650dd08a" />
+      <option value="e5471896-5b7c-4c3e-9ff7-58b6e1e89145" />
+      <option value="f6af28f7-a438-4f5a-b2b2-d491cc2e35e9" />
     </option>
     <option name="pendingTurns">
       <map>
+        <entry key="2f35fa2f-074f-4337-8abb-e804975a9f59">
+          <value>
+            <set>
+              <option value="cdc9ca57-fcc2-45b7-9d3f-3dd59e72e8a3" />
+            </set>
+          </value>
+        </entry>
+        <entry key="459bdf0a-f121-4b94-b850-50d785cc1212">
+          <value>
+            <set>
+              <option value="0a18c949-5bae-4f0d-a8d7-4487c4fcfb23" />
+              <option value="7ca45bac-52f2-4fd9-be2f-98c0c769ec43" />
+              <option value="cf1b9cdd-2875-40fb-a0b3-b4c4c6c15398" />
+              <option value="da7b914a-08bd-4e3d-a591-c2652a974850" />
+            </set>
+          </value>
+        </entry>
         <entry key="5cf9ef1e-33a9-45ec-80a6-e730507c55e9">
           <value>
             <set>
               <option value="4ebf478f-0a11-4f3e-bc4d-65efd750cbb6" />
+              <option value="4f7345e2-97af-4dd7-a069-e77d131efb87" />
               <option value="59e3ff15-ba68-4a7a-98bb-ae8a34b2f24d" />
               <option value="5e3ed958-fd75-439d-8a02-e55c117d5f6a" />
-              <option value="4f7345e2-97af-4dd7-a069-e77d131efb87" />
+            </set>
+          </value>
+        </entry>
+        <entry key="97bf5e88-3981-4de8-b10c-1670650dd08a">
+          <value>
+            <set>
+              <option value="58291e79-19c7-43aa-ba31-2eaf5c431834" />
+            </set>
+          </value>
+        </entry>
+        <entry key="e5471896-5b7c-4c3e-9ff7-58b6e1e89145">
+          <value>
+            <set>
+              <option value="7065cc9b-5a90-4ba7-89af-0b5fe912a993" />
+              <option value="f16bdbad-3d70-496e-b68c-6c53e3755dd4" />
+            </set>
+          </value>
+        </entry>
+        <entry key="f6af28f7-a438-4f5a-b2b2-d491cc2e35e9">
+          <value>
+            <set>
+              <option value="8b945a57-4d8b-4eac-8ac2-f7e18bccd457" />
             </set>
           </value>
         </entry>
       </map>
     </option>
     <pendingWorkingSetItems>
-      <entry key="5cf9ef1e-33a9-45ec-80a6-e730507c55e9">
+      <entry key="459bdf0a-f121-4b94-b850-50d785cc1212" />
+      <entry key="5cf9ef1e-33a9-45ec-80a6-e730507c55e9" />
+      <entry key="e5471896-5b7c-4c3e-9ff7-58b6e1e89145">
         <set>
-          <option value="file://$PROJECT_DIR$/user/Dockerfile" />
-          <option value="file://$PROJECT_DIR$/second_stack/Dockerfile" />
-          <option value="file://$PROJECT_DIR$/docker-compose.yml" />
-          <option value="file://$PROJECT_DIR$/.env.example" />
-          <option value="file://$PROJECT_DIR$/.env" />
-          <option value="file://$PROJECT_DIR$/.dockerignore" />
-          <option value="file://$PROJECT_DIR$/user/.dockerignore" />
-          <option value="file://$PROJECT_DIR$/second_stack/.dockerignore" />
-          <option value="file://$PROJECT_DIR$/DOCKER_GUIDE.md" />
+          <option value="file://$PROJECT_DIR$/user/src/main/java/com/etikos/user/security/SecurityConfig.java" />
+          <option value="file://$PROJECT_DIR$/user/src/main/java/com/etikos/user/controller/UserController.java" />
+          <option value="file://$PROJECT_DIR$/auth.service.fixed.ts" />
         </set>
       </entry>
     </pendingWorkingSetItems>
