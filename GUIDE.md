@@ -1,155 +1,211 @@
-# App Full Stack para gestionar usuarios y auditoria de acciones mediante Firebase/Firestore y PostgreSQL/Supabase.
+# App Full Stack para gestionar usuarios y auditoría de acciones mediante Firebase/Firestore y PostgreSQL/Supabase
+
 ## Arquitectura del proyecto
+
 ![alt text](images/arch.jpg "Arquitectura")
-Para la implementacion de la arquitectura se utilizo:
-- Spring Boot junto con Java para el desarrollo de los microservicios.
-- Docker Compose para la orquestacion de contenedores (cada microservicio en su propio contenedor).
-- Firebase/Firestore para la gestion de usuarios
-- PostgreSQL/Supabase como sistemas de gestion de datos.
-- Ionic para la creacion de una aplicación completa en Angular con capacitor para la integracion en dispositivos mobiles.
-- Tunnel NGROK para la creacion de un proxy local para la comunicacion entre el frontend y el backend.
-- diferentes manejos de autenticacion (JWT, bycript para contraseñas)
-## Obtencion de credenciales
-Al ser un proyecto de ejemplo, no se incluyeron las credenciales de los servicios, ya que estos servicios estan alojados en la nube y son privados. Para obtener las credenciales, se deben seguir los siguientes pasos:
+
+Para la implementación de la arquitectura se utilizó:
+
+* Spring Boot junto con Java para el desarrollo de los microservicios.
+* Docker Compose para la **orquestación** de contenedores (cada microservicio en su propio contenedor).
+* Firebase/Firestore para la **gestión** de usuarios.
+* PostgreSQL/Supabase como sistemas de gestión de datos.
+* Ionic para la creación de una aplicación completa en Angular con Capacitor para la **integración** en dispositivos móviles.
+* Túnel **ngrok** para la creación de un proxy local para la comunicación entre el frontend y el backend.
+* Diferentes manejos de autenticación (JWT, **bcrypt** para contraseñas).
+
+## Obtención de credenciales
+
+Al ser un proyecto de ejemplo, no se incluyeron las credenciales de los servicios, ya que estos servicios están alojados en la nube y son privados. Para obtener las credenciales, se deben seguir los siguientes pasos:
+
 1. Crear un proyecto en Firebase y obtener las credenciales del servicio (archivo JSON).
-    - Ir a la consola de Firebase: https://console.firebase.google.com
-    - Crear un nuevo proyecto
-    - Crea una base de datos en Firestore Database
+
+    * Ir a la consola de Firebase: [https://console.firebase.google.com](https://console.firebase.google.com)
+    * Crear un nuevo proyecto.
+    * Crear una base de datos en **Firestore Database**.
       ![alt text](images/firestorage.png "Firestore")
-    - Llenalo con los datos por defecto y en modo de pruebas
+    * Llenarla con los datos por defecto y en modo de pruebas.
       ![alt text](images/firestore_paso_3.png "Firestore paso 3")
-    - Luego debemos ir a la configuración del proyecto
-      ![alt text](images/configuracion.png "configuración del proyecto")
-    - Y en la pestaña de "Cuentas de servicio", generamos una nueva clave privada, ten encuenta elegir la opccion JAVA
-      ![alt text](images/clave_privada.png "clave privada")
-    - Esto descargara un archivo JSON con las credenciales del servicio, el cual debe ser guardado en la ruta bajo el nombre (firebase-service-account.json) `./user/src/main/resources/firebase-service-account.json`
-2. Obten el secreto JWT
-    - Puedes generar un secreto JWT utilizando herramientas en línea o bibliotecas específicas. Asegúrate de que sea una cadena segura y compleja.
-    - en este proyecto se obtuvo mediante el siguiente comando
-        ```bash
-        [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Minimum 0 -Maximum 256 }))
-        ```      
-        Este comando genera una cadena aleatoria de 32 caracteres, que se puede utilizar como secreto JWT, la terminal dara un resultado que debera ser copiado y pegado en el archivo `./.env` en la propiedad `JWT_SECRET`
-        Puedes aplicar este enfoque para generar un secreto JWT segura.
-3. Obtener el project id de tu proyecto de Firebase creado anteriormente
-    - En la configuración del proyecto, en la pestaña "General", encontrarás el "ID del proyecto". Copia este valor.
-    - Este valor debe ser pegado en el archivo `./.env` en la propiedad `FIREBASE_PROJECT_ID`
+    * Luego, ir a la configuración del proyecto.
+      ![alt text](images/configuracion.png "Configuración del proyecto")
+    * En la pestaña **“Cuentas de servicio”**, generar una nueva clave privada. Ten en cuenta elegir la opción **JAVA**.
+      ![alt text](images/clave_privada.png "Clave privada")
+    * Esto descargará un archivo JSON con las credenciales del servicio, el cual debe ser guardado en la ruta, bajo el nombre `firebase-service-account.json`:
+      `./user/src/main/resources/firebase-service-account.json`
+
+2. Obtener el secreto JWT
+
+    * Puedes generar un secreto JWT utilizando herramientas en línea o bibliotecas específicas. Asegúrate de que sea una cadena segura y compleja.
+    * En este proyecto se obtuvo mediante el siguiente comando:
+
+      ```bash
+      [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Minimum 0 -Maximum 256 }))
+      ```
+
+      Este comando genera una cadena aleatoria de 32 bytes codificada en Base64, que se puede utilizar como secreto JWT. La terminal dará un resultado que **deberá** ser copiado y pegado en el archivo `./.env` en la propiedad `JWT_SECRET`.
+      Puedes aplicar este enfoque para generar un secreto JWT **seguro**.
+
+3. Obtener el **Project ID** de tu proyecto de Firebase creado anteriormente
+
+    * En la configuración del proyecto, en la pestaña **“General”**, encontrarás el **“ID del proyecto”**. Copia este valor.
+    * Este valor debe ser pegado en el archivo `./.env` en la propiedad `FIREBASE_PROJECT_ID`.
+
 4. Configurar Supabase
-    - Crea una cuenta en Supabase: https://supabase.com/
-    - Crea un nuevo proyecto/organización
-    - recuerda tu contraseña del proyecto ya que es la misma que se utilizá en la conexion JDBC
-      ![alt text](images/supabase.png "supabase")
-    - Recuerda que en Type debe ir JDBC y en method SESSION POOLER y copia la URL del JDBC en el archivo `./.env` en la propiedad `SUPABASE_JDBC_URL`
-      ![alt text](images/url.png "supabase_1")
-5. AUDIT_SERVICE_BASE_URL
-    - Esta propiedad debe quedar tal cual en el archivo `./.env` ya que hace referencia al servicio de auditoria dentro de la red de docker compose.
-    - `AUDIT_SERVICE_BASE_URL=http://second-stack-service:8003` - Referencia al segundo microservicio de auditoria.
 
-Ten encuenta que estos pasos son necesarios para poder ejecutar el proyecto. Puedes Guiarte modificando el archivo `./.env.example` y copiando el contenido a `./.env`.
+    * Crea una cuenta en Supabase: [https://supabase.com/](https://supabase.com/)
+    * Crea un nuevo proyecto/organización.
+    * **Recuerda** tu contraseña del proyecto ya que es la misma que se utilizará en la conexión JDBC.
+      ![alt text](images/supabase.png "Supabase")
+    * En **Type** debe ir **JDBC** y en **Method** **SESSION POOLER**. Copia la URL JDBC en el archivo `./.env` en la propiedad `SUPABASE_JDBC_URL`.
+      ![alt text](images/url.png "Supabase - JDBC")
 
-Más información dentro de los Readme de cada microservicio.
-# Tunel NGROK
-Para que la aplicacion movil pueda comunicarse con el backend, es necesario crear un tunel utilizando NGROK. Esto se debe a que la aplicacion movil no puede acceder a localhost directamente.
-1. Descargar NGROK desde su sitio oficial: https://ngrok.com/download
-2. Sigue los pasos de instalación y crea un tunel en torno al microservicio de usuarios `localhost:8002`
-3. utiliza el siguiente comando necesario para la implementación del Tunel `ngrok http --host-header="localhost:8002" 8002` (Aplicalo en la terminal)
-Tendras este resultado:
-![alt text](images/ngrok.png "ngrok")
-Copia el link que aparece en la terminal (forwarding) y lo utilizalo en los enviroments del Frontend.
-# Guia de uso
+5. `AUDIT_SERVICE_BASE_URL`
+
+    * Esta propiedad debe quedar tal cual en el archivo `./.env` ya que hace referencia al servicio de auditoría dentro de la red de Docker Compose.
+    * `AUDIT_SERVICE_BASE_URL=http://second-stack-service:8003` — Referencia al segundo microservicio de auditoría.
+
+Ten en cuenta que estos pasos son necesarios para poder ejecutar el proyecto. Puedes guiarte modificando el archivo `./.env.example` y copiando el contenido a `./.env`.
+
+Más información dentro de los README de cada microservicio.
+
+# Túnel ngrok
+
+Para que la aplicación móvil pueda comunicarse con el backend, es necesario crear un túnel utilizando **ngrok**. Esto se debe a que la aplicación móvil no puede acceder a `localhost` directamente.
+
+1. Descargar **ngrok** desde su sitio oficial: [https://ngrok.com/download](https://ngrok.com/download)
+2. Sigue los pasos de instalación y crea un túnel hacia el microservicio de usuarios `localhost:8002`.
+3. Utiliza el siguiente comando para la implementación del túnel:
+
+   ```bash
+   ngrok http --host-header="localhost:8002" 8002
+   ```
+
+   Tendrás este resultado:
+   ![alt text](images/ngrok.png "ngrok")
+
+Copia el enlace que aparece en la terminal (**forwarding**) y utilízalo en los **environments** del frontend.
+
+# Guía de uso
+
 ## Backend
-Se creo un archivo `docker-compose-yaml` dentro del directorio raiz para que el despleigue sea mas facil.
 
-Se aplicaro metodos como health checker para que el backend se inicie solo cuando todos los servicios esten listos.
+Se creó un archivo `docker-compose.yml` dentro del directorio raíz para que el **despliegue** sea más fácil.
+
+Se aplicaron métodos como **healthcheck** para que el backend se inicie solo cuando todos los servicios estén listos.
+
 ```yml
 healthcheck:
-    test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8003/actuator/health | grep -q '\"status\":\"UP\"'" ]
-    interval: 20s
-    timeout: 5s
-    retries: 5
-    start_period: 40s
+  test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8003/actuator/health | grep -q '\"status\":\"UP\"'" ]
+  interval: 20s
+  timeout: 5s
+  retries: 5
+  start_period: 40s
 ```
-Para mayor informacion consulta el archivo `DOCKER_GUIDE.md` 
-## Frontend
-Ten a la mano la URL del tunel que generaste en el paso 3 de la seccion anterior.
 
-Copialo en el archivo `src/environments/environment.ts` y `src/environments/environment.prod.ts`
+Para mayor información, consulta el archivo `DOCKER_GUIDE.md`.
+
+## Frontend
+
+Ten a la mano la URL del túnel que generaste en el paso 3 de la sección anterior.
+
+**Cópiala** en los archivos `src/environments/environment.ts` y `src/environments/environment.prod.ts`:
+
 ```javascript
 export const environment = {
   production: false,
   apiUrl: 'https://ecc233eae7a8.ngrok-free.app/users'
 };
 ```
-Cambia `https://ecc233eae7a8.ngrok-free.app` por la URL que generaste con NGROK, pero manteniendo el prefix `/users` al final.
 
-Al ser una aplicación de IONIC se debera iniciar mediante el comando `ionic serve`
+Cambia `https://ecc233eae7a8.ngrok-free.app` por la URL que generaste con ngrok, **manteniendo el sufijo** `/users` al final.
 
-Para dispositivos moviles se debera ejecutar el comando `npx cap sync android` o `npx cap sync ios` depende delo que se desee ejecutar,
- y luego se debera ejecutar el comando `npx cap run android` o `npx cap run android` para ejecutar la aplicacion en el dispositivo.
+Al ser una aplicación de **Ionic**, se deberá iniciar mediante el comando:
 
-Ante dudas consulta la documentacion oficial de IONIC: https://capacitorjs.com/docs/android o el archivo `README.md` dentro del repositorio Frontend.
-
-En esta prueba se aplico con Android Studio para moviles Android.
-
-# Documentacion
-## Backend
-Se aplico una documentación mediante Swagger UI. para mayor información de los controladores, puedes visualizar esta documentacion mediante:
-- http://localhost:8002/swagger-ui/index.html
-- http://localhost:8003/swagger-ui/index.html
-## Frontend
-Se aplico una documentación mediante Compodoc. para mayor información de los componentes, puedes visualizar:
 ```bash
-# Generar documentacion estandar
+ionic serve
+```
+
+Para dispositivos móviles se deberá ejecutar:
+
+```bash
+npx cap sync android   # o: npx cap sync ios
+npx cap run android    # o: npx cap run ios
+```
+
+Ante dudas, consulta la documentación oficial de Ionic/Capacitor: [https://capacitorjs.com/docs/android](https://capacitorjs.com/docs/android) o el archivo `README.md` dentro del repositorio del frontend.
+
+En esta prueba se aplicó con Android Studio para móviles Android.
+
+# Documentación
+
+## Backend
+
+Se aplicó documentación mediante **Swagger UI**. Para mayor información de los controladores, puedes visualizar esta documentación en:
+
+* [http://localhost:8002/swagger-ui/index.html](http://localhost:8002/swagger-ui/index.html)
+* [http://localhost:8003/swagger-ui/index.html](http://localhost:8003/swagger-ui/index.html)
+
+## Frontend
+
+Se aplicó documentación mediante **Compodoc**. Para mayor información de los componentes, puedes visualizar:
+
+```bash
+# Generar documentación estándar
 npx compodoc -p tsconfig.doc.json
 
 # Servir con live reload en http://localhost:8080
 npx compodoc -p tsconfig.doc.json -s -w
 ```
-Ante dudas consulta la documentacion oficial de Compodoc: https://compodoc.app/guides/getting-started.html o el archivo `README.md` dentro del repositorio Frontend.
+
+Ante dudas, consulta la documentación oficial de Compodoc: [https://compodoc.app/guides/getting-started.html](https://compodoc.app/guides/getting-started.html) o el archivo `README.md` dentro del repositorio del frontend.
+
 # Extras
-- Aplicación de empaquetador de archivos (Frontend) mediante pnpm para mayor seguiridad de dependencias y versiones, utilizando reglas de tiempo
-- Gestión de Roles por parte del Backend (ADMIN,CUSTOMER,MANAGER) y gestion de permisos por rol.
-- El Administrador tiene su propio componente unico para gestionar usuarios, mientras que el usuario solo peudes visualizar el dashboard.
-- Seguridad mediante JWT,
-- Autenticacion mobil mediante biometria.
-- Autenticacion Web mediante TOTP.
-- Autenticacion mediante Firebase/Firestore con usuario y contraseña.
-- Backend lanza un usuario admin por defecto para poder utilizar la aplicacion sin problemas
+
+* Aplicación de empaquetador de archivos (frontend) mediante **pnpm** para mayor **seguridad** de dependencias y versiones, utilizando reglas de tiempo.
+* Gestión de roles por parte del backend (**ADMIN, CUSTOMER, MANAGER**) y gestión de permisos por rol.
+* El administrador tiene su propio componente **único** para gestionar usuarios, mientras que el usuario solo puede visualizar el **dashboard**.
+* Seguridad mediante **JWT**.
+* Autenticación **móvil** mediante **biometría**.
+* Autenticación web mediante **TOTP**.
+* Autenticación mediante Firebase/Firestore con usuario y contraseña.
+* El backend crea un usuario **admin** por defecto para poder utilizar la aplicación sin problemas.
+
 # Conclusiones
-Este proyecto es un ejemplo de una arquitectura de microservicios, con una arquitectura de microservicios de alto nivel.
 
-Cada acción descrita tiene un proposito, y cada microservicio tiene una responsabilidad.
+Este proyecto es un ejemplo de una arquitectura de microservicios de alto nivel.
 
-El manejo de urls y apis locales propone un problema al uso de dispositivos mobiles, por ende se aplico un tunel NGROK para poder comunicarse con el backend, a la vez
-esto funciona con la plataforma web ya que es un conector seguro entre amabs partes y no sera necesario aplicar una busqueda de ip local para que los dispositivos mobiles funcionen.
+Cada acción descrita tiene un **propósito**, y cada microservicio tiene una **responsabilidad** clara.
 
-Se orquesto el despliegue de los microservicios mediante Docker Compose, para que los servicios sean independientes y no sean dependientes entre si, adicionalmente para que el despliegue sea mas facil.
+El manejo de URLs y APIs locales supone un problema para el uso de dispositivos **móviles**; por ende, se aplicó un túnel ngrok para poder comunicarse con el backend. A la vez, esto funciona con la plataforma web, ya que es un conector seguro entre **ambas** partes y no será necesario buscar una IP local para que los dispositivos móviles funcionen.
 
-Se aplico una documentacion mediante Swagger UI y Compodoc para mayor facilidad de uso.
+Se **orquestó** el despliegue de los microservicios mediante Docker Compose, para que los servicios sean **independientes entre sí** y no sean dependientes unos de otros; adicionalmente, para que el despliegue sea más **fácil**.
 
-# Tecnologias
+Se aplicó documentación mediante Swagger UI y Compodoc para mayor facilidad de uso.
+
+# Tecnologías
+
 ## Frontend
 
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" height="40" alt="androidstudio logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" height="40" alt="androidstudio logo" />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" height="40" alt="angularjs logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" height="40" alt="angularjs logo" />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" height="40" alt="xcode logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" height="40" alt="xcode logo" />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" height="40" alt="ionic logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" height="40" alt="ionic logo" />
 </div>
 
 ## Backend
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="40" alt="spring logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="40" alt="firebase logo"  />
-</div>
 
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="40" alt="spring logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="40" alt="firebase logo" />
+</div>
