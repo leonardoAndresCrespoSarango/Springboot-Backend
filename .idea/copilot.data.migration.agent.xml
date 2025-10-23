@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AgentMigrationStateService">
-    <option name="migrationStatus" value="COMPLETED" />
+    <option name="pendingSessionIds">
+      <option value="5cf9ef1e-33a9-45ec-80a6-e730507c55e9" />
+    </option>
+    <option name="pendingTurns">
+      <map>
+        <entry key="5cf9ef1e-33a9-45ec-80a6-e730507c55e9">
+          <value>
+            <set>
+              <option value="4ebf478f-0a11-4f3e-bc4d-65efd750cbb6" />
+              <option value="59e3ff15-ba68-4a7a-98bb-ae8a34b2f24d" />
+              <option value="5e3ed958-fd75-439d-8a02-e55c117d5f6a" />
+              <option value="4f7345e2-97af-4dd7-a069-e77d131efb87" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <pendingWorkingSetItems>
+      <entry key="5cf9ef1e-33a9-45ec-80a6-e730507c55e9">
+        <set>
+          <option value="file://$PROJECT_DIR$/user/Dockerfile" />
+          <option value="file://$PROJECT_DIR$/second_stack/Dockerfile" />
+          <option value="file://$PROJECT_DIR$/docker-compose.yml" />
+          <option value="file://$PROJECT_DIR$/.env.example" />
+          <option value="file://$PROJECT_DIR$/.env" />
+          <option value="file://$PROJECT_DIR$/.dockerignore" />
+          <option value="file://$PROJECT_DIR$/user/.dockerignore" />
+          <option value="file://$PROJECT_DIR$/second_stack/.dockerignore" />
+          <option value="file://$PROJECT_DIR$/DOCKER_GUIDE.md" />
+        </set>
+      </entry>
+    </pendingWorkingSetItems>
   </component>
 </project>

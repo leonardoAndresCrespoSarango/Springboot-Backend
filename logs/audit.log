@@ -1,1 +1,12 @@
 2025-10-22 00:00:55.257 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:04:41.512 INFO  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:04:52.565 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:23:47.074 INFO  [http-nio-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:24:08.990 INFO  [http-nio-8002-exec-6] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:25:38.100 INFO  [http-nio-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:25:48.195 INFO  [http-nio-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:29:39.322 INFO  [http-nio-8002-exec-5] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:30:48.763 INFO  [http-nio-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:44:07.838 INFO  [http-nio-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 00:48:48.259 INFO  [http-nio-8002-exec-3] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 191.100.89.252
+2025-10-22 01:12:36.338 INFO  [http-nio-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 0:0:0:0:0:0:0:1
