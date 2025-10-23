@@ -108,5 +108,45 @@ npx compodoc -p tsconfig.doc.json -s -w
 Ante dudas consulta la documentacion oficial de Compodoc: https://compodoc.app/guides/getting-started.html o el archivo `README.md` dentro del repositorio Frontend.
 # Extras
 - Aplicación de empaquetador de archivos (Frontend) mediante pnpm para mayor seguiridad de dependencias y versiones, utilizando reglas de tiempo
-- Gestión de Roles por parte del Backend (ADMIN,CUSTOMER,MANAGER)
+- Gestión de Roles por parte del Backend (ADMIN,CUSTOMER,MANAGER) y gestion de permisos por rol.
+- El Administrador tiene su propio componente unico para gestionar usuarios, mientras que el usuario solo peudes visualizar el dashboard.
+- Autenticación mediante JWT, MFA y biometria.
+- Backend lanza un usuario admin por defecto para poder utilizar la aplicacion sin problemas
+# Conclusiones
+Este proyecto es un ejemplo de una arquitectura de microservicios, con una arquitectura de microservicios de alto nivel.
+
+Cada acción descrita tiene un proposito, y cada microservicio tiene una responsabilidad.
+
+El manejo de urls y apis locales propone un problema al uso de dispositivos mobiles, por ende se aplico un tunel NGROK para poder comunicarse con el backend, a la vez
+esto funciona con la plataforma web ya que es un conector seguro entre amabs partes y no sera necesario aplicar una busqueda de ip local para que los dispositivos mobiles funcionen.
+
+Se orquesto el despliegue de los microservicios mediante Docker Compose, para que los servicios sean independientes y no sean dependientes entre si, adicionalmente para que el despliegue sea mas facil.
+
+Se aplico una documentacion mediante Swagger UI y Compodoc para mayor facilidad de uso.
+
+# Tecnologias
+## Frontend
+
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" height="40" alt="androidstudio logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" height="40" alt="angularjs logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xcode/xcode-original.svg" height="40" alt="xcode logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg" height="40" alt="ionic logo"  />
+</div>
+
+## Backend
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="40" alt="spring logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="40" alt="firebase logo"  />
+</div>
 
