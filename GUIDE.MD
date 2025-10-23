@@ -54,7 +54,20 @@ Para que la aplicacion movil pueda comunicarse con el backend, es necesario crea
 2. Sigue los pasos de instalación y crea un tunel en torno al microservicio de usuarios `localhost:8002`
 3. utiliza el siguiente comando necesario para la implementación del Tunel `ngrok http --host-header="localhost:8002" 8002` (Aplicalo en la terminal)
 Tendras este resultado:
-![alt text](images/ngro.png "ngrok")
-Copia el link que aparece en la terminal y lo utilizalo en los enviroments del Frontend.
+![alt text](images/ngrok.png "ngrok")
+Copia el link que aparece en la terminal (forwarding) y lo utilizalo en los enviroments del Frontend.
 # Guia de uso
 ## Backend
+Se creo un archivo `docker-compose-yaml` dentro del directorio raiz para que el despleigue sea mas facil.
+
+Se aplicaro metodos como health checker para que el backend se inicie solo cuando todos los servicios esten listos.
+```javascript
+healthcheck:
+    test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8003/actuator/health | grep -q '\"status\":\"UP\"'" ]
+    interval: 20s
+    timeout: 5s
+    retries: 5
+    start_period: 40s
+```
+Para mayor informacion consulta el archivo `DOCKER_GUIDE.md` 
+## Frontend
