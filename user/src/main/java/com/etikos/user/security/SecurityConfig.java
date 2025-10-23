@@ -39,7 +39,6 @@ public class SecurityConfig {
                                 "/users/login/biometric",
                                 "/users/login/totp",
                                 "/users/password-reset",
-                                "/users/audit/logout",
                                 "/users/audit/login-failed",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",

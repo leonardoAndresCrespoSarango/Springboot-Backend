@@ -649,19 +649,21 @@ public class UserController {
         try {
             String userId = principalUid(auth);
 
-            // Solo registrar si hay un usuario autenticado
-            if (userId != null && !userId.isEmpty()) {
-                log.info("User logout: {}", userId);
-                audit.log(userId, userId, AuditAction.LOGOUT, http, null);
-                return ResponseEntity.ok(Map.of("message", "Logout successful"));
-            } else {
-                log.debug("Logout attempt without valid authentication");
-                return ResponseEntity.ok(Map.of("message", "Already logged out"));
+            // Validar que hay un usuario autenticado
+            if (userId == null || userId.isEmpty()) {
+                log.warn("Logout attempt without valid authentication. Auth object: {}", auth);
+                return ResponseEntity.status(401)
+                        .body(Map.of("message", "No authenticated user to logout"));
             }
+
+            log.info("User logout: {}", userId);
+            audit.log(userId, userId, AuditAction.LOGOUT, http, null);
+            return ResponseEntity.ok(Map.of("message", "Logout successful"));
         } catch (Exception e) {
             log.error("Error during logout audit", e);
             // No fallar el logout si hay error en auditoría
-            return ResponseEntity.ok(Map.of("message", "Logout completed"));
+            return ResponseEntity.status(500)
+                    .body(Map.of("message", "Error during logout", "details", e.getMessage()));
         }
     }
 
