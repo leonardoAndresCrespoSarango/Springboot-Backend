@@ -975,3 +975,185 @@ Caused by: org.springframework.web.client.HttpServerErrorException$InternalServe
 2025-10-23 06:30:28.423 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
 2025-10-23 06:30:31.838 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
 2025-10-23 06:30:32.631 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 14:40:05.235 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:05.282 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:05.284 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:07.147 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.245 seconds (process running for 2.585)
+2025-10-23 14:40:07.180 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:08.118 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:08.146 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:08.150 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:09.737 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.891 seconds (process running for 2.219)
+2025-10-23 14:40:09.768 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:10.826 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:10.833 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:10.834 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:12.376 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.84 seconds (process running for 2.147)
+2025-10-23 14:40:12.404 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:13.583 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:13.609 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:13.610 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:15.058 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.701 seconds (process running for 2.031)
+2025-10-23 14:40:15.087 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:16.628 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:16.656 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:16.658 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:18.151 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.751 seconds (process running for 2.086)
+2025-10-23 14:40:18.186 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:20.618 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:20.661 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:20.665 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:22.454 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.109 seconds (process running for 2.471)
+2025-10-23 14:40:22.494 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:26.523 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:26.534 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:26.536 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:28.249 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.958 seconds (process running for 2.291)
+2025-10-23 14:40:28.291 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:40:35.572 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:40:35.570 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:40:35.574 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:40:37.576 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.308 seconds (process running for 2.636)
+2025-10-23 14:40:37.621 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:37.441 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:37.450 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:37.451 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:39.305 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.141 seconds (process running for 2.522)
+2025-10-23 14:42:39.349 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:40.480 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:40.512 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:40.513 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:42.431 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.382 seconds (process running for 2.797)
+2025-10-23 14:42:42.479 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:43.425 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:43.432 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:43.432 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:45.284 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.107 seconds (process running for 2.389)
+2025-10-23 14:42:45.336 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:46.695 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:46.730 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:46.733 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:48.508 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.247 seconds (process running for 2.563)
+2025-10-23 14:42:48.558 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:50.214 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:50.223 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:50.225 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:52.721 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.827 seconds (process running for 3.104)
+2025-10-23 14:42:52.797 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:42:55.173 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:42:55.194 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:42:55.196 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:42:57.252 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.334 seconds (process running for 2.584)
+2025-10-23 14:42:57.304 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:43:01.398 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:43:01.429 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:43:01.430 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:43:03.200 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.059 seconds (process running for 2.444)
+2025-10-23 14:43:03.253 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:43:10.516 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:43:10.525 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:43:10.530 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:43:12.421 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.192 seconds (process running for 2.487)
+2025-10-23 14:43:12.462 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:43:26.100 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:43:26.111 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:43:26.115 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:43:27.958 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.112 seconds (process running for 2.446)
+2025-10-23 14:43:28.007 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:09.948 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:09.983 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:09.984 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:11.813 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.15 seconds (process running for 2.476)
+2025-10-23 14:44:11.867 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:12.865 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:12.922 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:12.923 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:14.577 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.04 seconds (process running for 2.346)
+2025-10-23 14:44:14.615 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:15.753 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:15.777 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:15.778 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:17.517 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.154 seconds (process running for 2.496)
+2025-10-23 14:44:17.565 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:18.761 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:18.788 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:18.789 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:20.405 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.917 seconds (process running for 2.17)
+2025-10-23 14:44:20.450 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:21.989 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:22.009 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:22.010 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:23.631 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.894 seconds (process running for 2.122)
+2025-10-23 14:44:23.660 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:26.037 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:26.066 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:26.069 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:27.622 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.859 seconds (process running for 2.126)
+2025-10-23 14:44:27.664 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:31.628 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:31.643 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:31.646 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:33.236 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.851 seconds (process running for 2.136)
+2025-10-23 14:44:33.283 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:44:40.562 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:44:40.591 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 14:44:40.595 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:44:42.239 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 1.939 seconds (process running for 2.239)
+2025-10-23 14:44:42.282 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:49:29.787 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:49:29.836 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 7 (/app/app.jar started by spring in /app)
+2025-10-23 14:49:29.839 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:49:31.805 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.335 seconds (process running for 3.02)
+2025-10-23 14:49:31.871 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:49:34.786 INFO  [main] c.e.user.config.AdminInitializer - =============================================================
+2025-10-23 14:49:34.787 INFO  [main] c.e.user.config.AdminInitializer - DEFAULT ADMIN USER CREATED SUCCESSFULLY
+2025-10-23 14:49:34.787 INFO  [main] c.e.user.config.AdminInitializer - Email: admin@etikos.com
+2025-10-23 14:49:34.788 INFO  [main] c.e.user.config.AdminInitializer - Username: admin
+2025-10-23 14:49:34.788 INFO  [main] c.e.user.config.AdminInitializer - Password: Admin123!
+2025-10-23 14:49:34.788 INFO  [main] c.e.user.config.AdminInitializer - IMPORTANT: Please change the default password immediately!
+2025-10-23 14:49:34.789 INFO  [main] c.e.user.config.AdminInitializer - =============================================================
+2025-10-23 14:54:36.595 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 14:54:36.615 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 7 (/app/app.jar started by spring in /app)
+2025-10-23 14:54:36.617 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 14:54:38.798 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 2.5 seconds (process running for 2.856)
+2025-10-23 14:54:38.839 INFO  [main] c.e.user.config.AdminInitializer - Checking if default admin user exists...
+2025-10-23 14:54:40.619 INFO  [main] c.e.user.config.AdminInitializer - Admin user already exists. Skipping creation.
+2025-10-23 14:57:59.077 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 14:57:59.080 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 14:57:59.633 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 14:58:01.860 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 14:58:28.624 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 14:58:28.625 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 14:58:28.940 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 14:58:29.247 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 15:00:26.629 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 15:00:26.632 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 15:00:26.937 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 15:00:27.296 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 15:01:22.337 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 15:01:22.342 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 15:01:22.689 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 15:01:23.005 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 15:06:38.173 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 15:06:38.192 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 15:06:39.169 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 15:06:39.816 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 15:18:50.805 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 15:18:50.819 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 15:18:51.977 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 15:18:52.742 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 15:19:05.939 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - TOTP setup requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:07.030 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - TOTP setup initiated for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:24.574 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - TOTP verification requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:25.165 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - TOTP enabled successfully for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:31.372 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 15:19:31.376 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 15:19:31.680 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 15:19:32.046 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 15:19:41.492 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - TOTP login verification for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:41.706 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:19:42.066 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 15:20:00.866 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login request received for email: admin@etikos.com
+2025-10-23 15:20:00.868 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
+2025-10-23 15:20:01.162 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
+2025-10-23 15:20:01.503 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login successful for email: admin@etikos.com

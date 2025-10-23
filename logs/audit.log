@@ -816,3 +816,14 @@ org.springframework.web.client.HttpServerErrorException$InternalServerError: 500
 2025-10-23 06:01:09.859 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
 2025-10-23 06:05:49.500 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
 2025-10-23 06:30:32.630 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 14:58:01.858 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 192.168.65.1
+2025-10-23 14:58:29.246 INFO  [http-nio-0.0.0.0-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 192.168.65.1
+2025-10-23 15:00:27.295 INFO  [http-nio-0.0.0.0-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:01:23.004 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 66.231.65.198
+2025-10-23 15:06:39.814 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:18:52.741 INFO  [http-nio-0.0.0.0-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:19:07.689 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:19:25.608 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:19:32.045 INFO  [http-nio-0.0.0.0-8002-exec-5] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:19:42.065 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 66.231.65.198
+2025-10-23 15:20:01.501 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 9lUru6FC3t6ibKrGBkp7 | IP: 66.231.65.198

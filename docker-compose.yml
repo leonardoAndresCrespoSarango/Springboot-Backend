@@ -12,11 +12,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - AUDIT_SERVICE_BASE_URL=http://second-stack-service:8003
       - JAVA_OPTS=-Xmx512m -Xms256m
-      # Si usas un archivo de credenciales fuera del classpath:
-      # - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/firebase-service-account.json
-      # - SPRING_PROFILES_ACTIVE=docker
     volumes:
-      # Si tu app espera el JSON por ruta (NO por classpath):
       - ./user/src/main/resources/firebase-service-account.json:/app/secrets/firebase-service-account.json:ro
       # Logs opcional
       - ./logs:/app/logs
@@ -44,7 +40,6 @@ services:
     environment:
       - SUPABASE_JDBC_URL=${SUPABASE_JDBC_URL}
       - JAVA_OPTS=-Xmx512m -Xms256m
-      # - SPRING_PROFILES_ACTIVE=docker
     networks:
       - etikos-network
     restart: unless-stopped

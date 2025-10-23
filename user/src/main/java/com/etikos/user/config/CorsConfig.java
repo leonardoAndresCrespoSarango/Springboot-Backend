@@ -18,11 +18,11 @@ public class CorsConfig {
 
         // Permitir orígenes (Angular en desarrollo y producción)
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:4200",        // Angular desarrollo
-                "http://localhost:4201",        // Angular desarrollo (puerto alternativo)
-                "http://localhost:8100",        // Otro puerto común
-                "http://localhost:8003",       // Producción (cambiar por tu dominio)
-                "http://10.0.2.2:8080",        // Emulador Android Studio
+                "http://localhost:4200",
+                "http://localhost:4201",
+                "http://localhost:8100",
+                "http://localhost:8003",
+                "http://10.0.2.2:8080",
                 "http://192.168.18.71:8100",
                 "http://192.168.18.71:4200",
                 "http://localhost:59335"
