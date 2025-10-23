@@ -1,0 +1,662 @@
+openapi: 3.0.3
+info:
+  title: User Microservice API
+  version: 1.0.0
+  description: |
+    API para la gestion de usuarios, autenticacion multifactor (TOTP) y preferencias biometricas.
+    Todos los endpoints marcados con *ADMIN* requieren que el `role` del JWT sea `ADMIN`.
+servers:
+  - url: http://localhost:8002
+    description: Entorno local
+tags:
+  - name: Autenticacion
+    description: Registro, login y flujos de MFA
+  - name: Usuarios
+    description: Administracion de perfiles y credenciales
+  - name: TOTP
+    description: Configuracion y verificacion de segundo factor
+  - name: Biometria
+    description: Preferencias de autenticacion biometrica
+  - name: Auditoria
+    description: Eventos auxiliares para registro en el servicio de auditoria
+paths:
+  /users/register:
+    post:
+      tags: [Autenticacion]
+      summary: Registrar usuario (publico)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/login:
+    post:
+      tags: [Autenticacion]
+      summary: Login con email y contrasena (publico)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/login/biometric:
+    post:
+      tags: [Autenticacion]
+      summary: Login con autenticacion biometrica (publico)
+      parameters:
+        - in: query
+          name: uid
+          required: true
+          schema:
+            type: string
+          description: Identificador del usuario validado biometricamente
+      responses:
+        '200':
+          description: Login biometrico exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/login/totp:
+    post:
+      tags: [Autenticacion]
+      summary: Completar login con codigo TOTP (publico)
+      description: |
+        Segunda etapa del login cuando el usuario tiene TOTP habilitado.
+        Utiliza el `tempSessionId` devuelto en el login inicial como `uid`.
+      parameters:
+        - in: query
+          name: uid
+          required: true
+          schema:
+            type: string
+          description: Identificador temporal de sesion del usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TotpVerifyRequest'
+      responses:
+        '200':
+          description: Login TOTP exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users:
+    get:
+      tags: [Usuarios]
+      summary: Listar usuarios (ADMIN)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/{uid}:
+    get:
+      tags: [Usuarios]
+      summary: Obtener usuario por UID (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UidPathParam'
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [Usuarios]
+      summary: Eliminar usuario (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UidPathParam'
+      responses:
+        '200':
+          description: Usuario eliminado
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/{uid}/credentials:
+    put:
+      tags: [Usuarios]
+      summary: Actualizar email o contrasena (ADMIN)
+      description: Campos opcionales; solo se actualiza lo presente en la peticion.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UidPathParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCredentialsRequest'
+      responses:
+        '200':
+          description: Credenciales actualizadas
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/{uid}/block:
+    put:
+      tags: [Usuarios]
+      summary: Bloquear o desbloquear usuario (ADMIN)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UidPathParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlockRequest'
+      responses:
+        '200':
+          description: Estado de bloqueo actualizado
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/password-reset:
+    post:
+      tags: [Autenticacion]
+      summary: Solicitar restablecimiento de contrasena (publico)
+      parameters:
+        - in: query
+          name: email
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: Peticion registrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/totp/setup:
+    post:
+      tags: [TOTP]
+      summary: Iniciar configuracion TOTP
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Secreto y QR para configurar el autenticador
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotpSetupResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/totp/verify:
+    post:
+      tags: [TOTP]
+      summary: Verificar codigo TOTP y habilitar MFA
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TotpVerifyRequest'
+      responses:
+        '200':
+          description: Resultado de la verificacion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotpOperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/totp/disable:
+    post:
+      tags: [TOTP]
+      summary: Deshabilitar TOTP
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TotpVerifyRequest'
+      responses:
+        '200':
+          description: Resultado de la desactivacion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotpOperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/totp/status:
+    get:
+      tags: [TOTP]
+      summary: Consultar estado TOTP del usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Estado de TOTP
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totpEnabled:
+                    type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/biometric:
+    put:
+      tags: [Biometria]
+      summary: Actualizar preferencia biometrica del usuario autenticado
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BiometricPreferenceRequest'
+      responses:
+        '200':
+          description: Preferencia actualizada
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/{uid}/biometric:
+    get:
+      tags: [Biometria]
+      summary: Obtener preferencia biometrica por usuario
+      description: Requiere que el solicitante sea ADMIN o el mismo usuario (`uid` del token).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UidPathParam'
+      responses:
+        '200':
+          description: Preferencia biometrica
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BiometricPreference'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/biometric-status:
+    get:
+      tags: [Biometria]
+      summary: Listar estado biometrico de todos los usuarios (ADMIN)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Estados biometricos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BiometricStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/audit/logout:
+    post:
+      tags: [Auditoria]
+      summary: Registrar logout del usuario actual
+      description: >
+        Permite logging explicito del evento de logout. Si no hay usuario autenticado,
+        devuelve un mensaje informativo sin error.
+      requestBody:
+        required: false
+      responses:
+        '200':
+          description: Resultado del registro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /users/audit/login-failed:
+    post:
+      tags: [Auditoria]
+      summary: Registrar intento de login fallido manualmente
+      parameters:
+        - in: query
+          name: email
+          required: true
+          schema:
+            type: string
+            format: email
+        - in: query
+          name: reason
+          required: true
+          schema:
+            type: string
+          description: Codigo o explicacion del fallo
+      responses:
+        '200':
+          description: Evento auditado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    UidPathParam:
+      name: uid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Identificador ??nico del usuario en Firebase
+  responses:
+    BadRequest:
+      description: Solicitud inv? ! lida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Autenticacion requerida o token inv? ! lido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Permisos insuficientes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Error interno no controlado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [username, name, lastname, email, password]
+      properties:
+        username:
+          type: string
+          example: jdoe
+        name:
+          type: string
+          example: John
+        lastname:
+          type: string
+          example: Doe
+        email:
+          type: string
+          format: email
+          example: john.doe@example.com
+        password:
+          type: string
+          format: password
+          description: Contrasena en texto plano (se almacena encriptada)
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: john.doe@example.com
+        password:
+          type: string
+          format: password
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT Bearer token
+        user:
+          $ref: '#/components/schemas/UserProfile'
+        totpRequired:
+          type: boolean
+          description: Indica si se requiere codigo TOTP adicional
+        tempSessionId:
+          type: string
+          nullable: true
+          description: Identificador temporal mientras se valida TOTP
+    UserProfile:
+      type: object
+      properties:
+        uid:
+          type: string
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        role:
+          type: string
+          enum: [CUSTOMER, ADMIN]
+        disabled:
+          type: boolean
+        biometricEnabled:
+          type: boolean
+        totpEnabled:
+          type: boolean
+    UpdateCredentialsRequest:
+      type: object
+      properties:
+        newEmail:
+          type: string
+          format: email
+        newPassword:
+          type: string
+          format: password
+      description: Enviar solo los campos que se desean actualizar.
+    BlockRequest:
+      type: object
+      required: [disabled]
+      properties:
+        disabled:
+          type: boolean
+          description: true para bloquear, false para desbloquear
+    TotpVerifyRequest:
+      type: object
+      required: [code]
+      properties:
+        code:
+          type: string
+          pattern: '^[0-9]{6}$'
+          example: '123456'
+    TotpSetupResponse:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: Clave privada TOTP
+        qrCodeDataUri:
+          type: string
+          description: URI base64 para generar el QR en el cliente
+    TotpOperationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    BiometricPreferenceRequest:
+      type: object
+      required: [enabled]
+      properties:
+        enabled:
+          type: boolean
+    BiometricPreference:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    BiometricStatus:
+      type: object
+      properties:
+        uid:
+          type: string
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        biometricEnabled:
+          type: boolean
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+

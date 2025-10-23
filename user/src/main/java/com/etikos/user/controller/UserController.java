@@ -5,6 +5,15 @@ import com.etikos.user.audit.AuditAction;
 import com.etikos.user.audit.AuditService;
 import com.etikos.user.dto.*;
 import com.etikos.user.services.UserProfileService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -12,14 +21,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "Usuarios", description = "Operaciones de registro, autenticacion, MFA y administracion de usuarios")
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -33,6 +43,15 @@ public class UserController {
     }
 
     // REGISTER (público)
+    @Operation(
+            summary = "Registrar un usuario",
+            description = "Crea un nuevo usuario con rol CUSTOMER en Firestore y registra el evento en el servicio de auditoria."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuario registrado", content = @Content(schema = @Schema(implementation = UserProfileDto.class))),
+            @ApiResponse(responseCode = "400", description = "Solicitud invalida"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/register")
     public ResponseEntity<UserProfileDto> register(@Valid @RequestBody RegisterRequest req,
                                                    HttpServletRequest http) throws Exception {
@@ -43,6 +62,16 @@ public class UserController {
     }
 
     // LOGIN (público)
+    @Operation(
+            summary = "Login con email y contrasena",
+            description = "Valida las credenciales del usuario y devuelve un JWT. Si el usuario tiene TOTP habilitado, indica que se requiere el segundo factor."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Login exitoso", content = @Content(schema = @Schema(implementation = LoginResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Solicitud invalida"),
+            @ApiResponse(responseCode = "401", description = "Credenciales invalidas o cuenta bloqueada"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req,
                                                HttpServletRequest http) {
@@ -97,6 +126,18 @@ public class UserController {
     }
 
     // LOGIN CON BIOMETRÍA (público)
+    @Operation(
+            summary = "Login con biometria",
+            description = "Genera un JWT para el usuario ya validado biometricamente o indica si necesita completar TOTP.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario autenticado biometricamente", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Login biometrico exitoso", content = @Content(schema = @Schema(implementation = LoginResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Biometria no habilitada o usuario bloqueado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/login/biometric")
     public ResponseEntity<LoginResponse> loginWithBiometric(@RequestParam String uid,
                                                             HttpServletRequest http) {
@@ -152,6 +193,17 @@ public class UserController {
     }
 
     // LIST ALL USERS (solo ADMIN)
+    @Operation(
+            summary = "Listar usuarios",
+            description = "Devuelve todos los usuarios registrados. Requiere rol ADMIN."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Listado de usuarios", content = @Content(array = @ArraySchema(schema = @Schema(implementation = UserProfileDto.class)))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<UserProfileDto>> listUsers(Authentication auth) throws Exception {
@@ -161,6 +213,21 @@ public class UserController {
     }
 
     // GET USER BY ID (solo ADMIN)
+    @Operation(
+            summary = "Obtener usuario por UID",
+            description = "Consulta los datos de un usuario especifico. Requiere rol ADMIN.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario en Firebase", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuario encontrado", content = @Content(schema = @Schema(implementation = UserProfileDto.class))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{uid}")
     public ResponseEntity<UserProfileDto> getUserById(@PathVariable String uid, Authentication auth) throws Exception {
@@ -170,6 +237,22 @@ public class UserController {
     }
 
     // CREDENTIALS_UPDATED (solo ADMIN)
+    @Operation(
+            summary = "Actualizar credenciales del usuario",
+            description = "Permite a un administrador actualizar email y/o contrasena de un usuario.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario en Firebase", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Credenciales actualizadas"),
+            @ApiResponse(responseCode = "400", description = "Solicitud invalida"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{uid}/credentials")
     public ResponseEntity<Void> updateCredentials(@PathVariable String uid,
@@ -186,6 +269,22 @@ public class UserController {
     }
 
     // BLOCK / UNBLOCK (solo ADMIN)
+    @Operation(
+            summary = "Bloquear o desbloquear usuario",
+            description = "Actualiza el estado disabled del usuario. Requiere rol ADMIN.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario en Firebase", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Estado del usuario actualizado"),
+            @ApiResponse(responseCode = "400", description = "Solicitud invalida"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{uid}/block")
     public ResponseEntity<Void> block(@PathVariable String uid,
@@ -200,6 +299,21 @@ public class UserController {
     }
 
     // DELETE USER (solo ADMIN)
+    @Operation(
+            summary = "Eliminar usuario",
+            description = "Elimina definitivamente al usuario indicado. Requiere rol ADMIN.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario en Firebase", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuario eliminado"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{uid}")
     public ResponseEntity<Void> deleteUser(@PathVariable String uid,
@@ -212,6 +326,18 @@ public class UserController {
     }
 
     // PASSWORD RESET (público) - Placeholder para implementación futura
+    @Operation(
+            summary = "Solicitar restablecimiento de contrasena",
+            description = "Registra la solicitud de restablecimiento (placeholder).",
+            parameters = {
+                    @Parameter(name = "email", description = "Email del usuario a notificar", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Solicitud registrada", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "400", description = "Solicitud invalida"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/password-reset")
     public ResponseEntity<Map<String, String>> passwordReset(@RequestParam("email") String email,
                                                              HttpServletRequest http) throws Exception {
@@ -227,6 +353,16 @@ public class UserController {
      * Inicia la configuración de TOTP para el usuario autenticado.
      * Devuelve un QR code para escanear con Google Authenticator
      */
+    @Operation(
+            summary = "Iniciar configuracion TOTP",
+            description = "Genera un secreto y un QR para configurar TOTP. Requiere usuario autenticado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Secreto generado", content = @Content(schema = @Schema(implementation = TotpSetupResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/totp/setup")
     public ResponseEntity<TotpSetupResponse> setupTotp(Authentication authentication,
                                                        HttpServletRequest http) {
@@ -254,6 +390,17 @@ public class UserController {
     /**
      * Verifica el código TOTP y habilita TOTP para el usuario si es correcto
      */
+    @Operation(
+            summary = "Verificar codigo TOTP",
+            description = "Valida el codigo proporcionado y habilita TOTP para el usuario autenticado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Resultado de la verificacion", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "400", description = "Codigo invalido"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/totp/verify")
     public ResponseEntity<Map<String, Object>> verifyAndEnableTotp(
             @Valid @RequestBody TotpVerifyRequest req,
@@ -290,6 +437,17 @@ public class UserController {
     /**
      * Deshabilita TOTP para el usuario (requiere código válido para confirmar)
      */
+    @Operation(
+            summary = "Deshabilitar TOTP",
+            description = "Desactiva TOTP para el usuario autenticado tras validar el codigo."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Resultado de la desactivacion", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "400", description = "Codigo invalido"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/totp/disable")
     public ResponseEntity<Map<String, Object>> disableTotp(
             @Valid @RequestBody TotpVerifyRequest req,
@@ -327,6 +485,18 @@ public class UserController {
      * Login con verificación TOTP (segunda etapa del login)
      * Se llama después del login normal cuando el usuario tiene TOTP habilitado
      */
+    @Operation(
+            summary = "Completar login con TOTP",
+            description = "Valida el codigo TOTP durante la segunda etapa del login.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador de sesion temporal", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Login completado", content = @Content(schema = @Schema(implementation = LoginResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Codigo TOTP invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/login/totp")
     public ResponseEntity<LoginResponse> loginWithTotp(@Valid @RequestBody TotpVerifyRequest req,
                                                        @RequestParam String uid,
@@ -368,6 +538,16 @@ public class UserController {
     /**
      * Consulta si el usuario tiene TOTP habilitado
      */
+    @Operation(
+            summary = "Consultar estado de TOTP",
+            description = "Devuelve si el usuario autenticado tiene TOTP habilitado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Estado obtenido", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/totp/status")
     public ResponseEntity<Map<String, Boolean>> getTotpStatus(Authentication authentication) {
         try {
@@ -390,6 +570,16 @@ public class UserController {
     }
 
     // ENDPOINT: Actualizar preferencia biométrica (usuario autenticado)
+    @Operation(
+            summary = "Actualizar preferencia biometrica",
+            description = "Activa o desactiva la autenticacion biometrica para el usuario logueado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Preferencia actualizada"),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/biometric")
     public ResponseEntity<Void> updateBiometric(@RequestBody BiometricPreferenceDto dto, Authentication authentication) throws Exception {
         String uid = authentication.getName();
@@ -398,6 +588,21 @@ public class UserController {
     }
 
     // ENDPOINT: Consultar preferencia biométrica (usuario autenticado o admin)
+    @Operation(
+            summary = "Obtener preferencia biometrica",
+            description = "Permite a un administrador o al propio usuario consultar si tiene habilitada la autenticacion biometrica.",
+            parameters = {
+                    @Parameter(name = "uid", description = "Identificador del usuario en Firebase", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Preferencia obtenida", content = @Content(schema = @Schema(implementation = BiometricPreferenceDto.class))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/{uid}/biometric")
     public ResponseEntity<BiometricPreferenceDto> getBiometric(@PathVariable String uid, Authentication authentication) throws Exception {
         // Permitir solo al propio usuario o admin
@@ -410,6 +615,17 @@ public class UserController {
     }
 
     // ENDPOINT: Listar estado biométrico de todos los usuarios (solo admin)
+    @Operation(
+            summary = "Listar estado biometrico de usuarios",
+            description = "Devuelve el estado de autenticacion biometrica de todos los usuarios. Requiere rol ADMIN."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Estados obtenidos", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Map.class)))),
+            @ApiResponse(responseCode = "401", description = "Token invalido"),
+            @ApiResponse(responseCode = "403", description = "Permisos insuficientes"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/biometric-status")
     public ResponseEntity<List<Map<String, Object>>> getAllBiometricStatus() throws Exception {
@@ -420,6 +636,14 @@ public class UserController {
         return (auth != null && auth.getPrincipal() != null) ? auth.getPrincipal().toString() : null;
     }
 
+    @Operation(
+            summary = "Registrar logout",
+            description = "Loguea manualmente el evento de cierre de sesion en el servicio de auditoria."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Evento registrado", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/audit/logout")
     public ResponseEntity<Map<String, String>> auditLogout(HttpServletRequest http, Authentication auth) {
         try {
@@ -441,6 +665,18 @@ public class UserController {
         }
     }
 
+    @Operation(
+            summary = "Registrar login fallido",
+            description = "Permite registrar manualmente un intento de login fallido, por ejemplo desde el frontend.",
+            parameters = {
+                    @Parameter(name = "email", description = "Email del usuario que intento iniciar sesion", required = true),
+                    @Parameter(name = "reason", description = "Descripcion corta de la razon del fallo", required = true)
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Evento registrado", content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno")
+    })
     @PostMapping("/audit/login-failed")
     public ResponseEntity<Map<String, String>> auditLoginFailed(@RequestParam String email,
                                                                 @RequestParam String reason,

@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: Audit Log Microservice API
+  version: 1.0.0
+  description: |
+    API para registrar y consultar eventos de auditoria generados por otros microservicios.
+servers:
+  - url: http://localhost:8003
+    description: Entorno local
+tags:
+  - name: Auditoria
+    description: Gestion de eventos auditados
+paths:
+  /api/audits:
+    post:
+      tags: [Auditoria]
+      summary: Registrar un evento de auditoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLogRequest'
+            examples:
+              loginSuccess:
+                summary: Login exitoso
+                value:
+                  uid: usr_123
+                  actorUid: usr_123
+                  action: LOGIN
+                  ip: 203.0.113.8
+                  userAgent: Mozilla/5.0
+                  metadata:
+                    method: password
+      responses:
+        '201':
+          description: Evento registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogResponse'
+        '400':
+          description: Peticion invalida
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      tags: [Auditoria]
+      summary: Buscar eventos de auditoria
+      description: |
+        Permite filtrar por usuario, accion y rango de fechas.
+        Soporta paginacion estandar de Spring (`page`, `size`, `sort`).
+      parameters:
+        - in: query
+          name: uid
+          schema:
+            type: string
+          description: UID del usuario afectado
+        - in: query
+          name: action
+          schema:
+            $ref: '#/components/schemas/AuditAction'
+          description: Accion auditada
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Fecha/hora inicial (ISO-8601)
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Fecha/hora final (ISO-8601)
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - in: query
+          name: size
+          schema:
+            type: integer
+            minimum: 1
+            default: 20
+        - in: query
+          name: sort
+          schema:
+            type: string
+            example: timestamp,desc
+          description: Propiedad y sentido (`propiedad,asc|desc`). Por defecto `timestamp,desc`.
+      responses:
+        '200':
+          description: Pagina de eventos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageAuditLogResponse'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Error interno no controlado
+  schemas:
+    AuditLogRequest:
+      type: object
+      required: [uid, action]
+      properties:
+        uid:
+          type: string
+          description: Usuario afectado por la accion
+        actorUid:
+          type: string
+          nullable: true
+          description: Usuario que ejecuto la accion (si aplica)
+        action:
+          $ref: '#/components/schemas/AuditAction'
+        timestamp:
+          type: string
+          format: date-time
+          description: Fecha/hora del evento. Si se omite se usara el momento actual.
+        ip:
+          type: string
+          description: Direccion IP asociada
+        userAgent:
+          type: string
+          description: User-Agent reportado
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Datos adicionales (clave/valor)
+    AuditLogResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        uid:
+          type: string
+        actorUid:
+          type: string
+          nullable: true
+        action:
+          $ref: '#/components/schemas/AuditAction'
+        timestamp:
+          type: string
+          format: date-time
+        ip:
+          type: string
+          nullable: true
+        userAgent:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: {}
+    AuditAction:
+      type: string
+      enum:
+        - REGISTER
+        - LOGIN
+        - LOGOUT
+        - LOGIN_FAILED
+        - PASSWORD_RESET_LINK_SENT
+        - CREDENTIALS_UPDATED
+        - USER_BLOCKED
+        - USER_UNBLOCKED
+        - ROLE_CHANGED
+    PageAuditLogResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLogResponse'
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        size:
+          type: integer
+        number:
+          type: integer
+          description: Numero de pagina actual (0-index)
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/PageSort'
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+    PageSort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/PageSort'
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
