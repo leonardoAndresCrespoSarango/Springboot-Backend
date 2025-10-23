@@ -900,3 +900,70 @@ Caused by: org.springframework.web.client.HttpServerErrorException$InternalServe
 	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:567)
 	at com.etikos.user.audit.AuditService.log(AuditService.java:47)
 	... 147 common frames omitted
+2025-10-23 05:32:51.412 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2025-10-23 05:32:51.495 INFO  [main] com.etikos.user.UserApplication - Starting UserApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1 (/app/app.jar started by spring in /app)
+2025-10-23 05:32:51.497 INFO  [main] com.etikos.user.UserApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 05:32:56.045 INFO  [main] com.etikos.user.UserApplication - Started UserApplication in 5.229 seconds (process running for 5.862)
+2025-10-23 05:33:07.305 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:33:07.306 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:33:10.494 WARN  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - Login failed: Invalid password for email: leonardo@example.com
+2025-10-23 05:33:10.495 WARN  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Login failed for email: leonardo@example.com - Reason: INVALID_PASSWORD
+2025-10-23 05:44:26.962 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:44:26.971 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:44:27.632 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 05:44:28.089 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:46:20.358 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:46:20.360 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:46:20.633 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 05:46:20.962 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:49:02.832 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:49:02.834 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:49:03.107 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 05:49:03.443 INFO  [http-nio-0.0.0.0-8002-exec-4] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:50:15.007 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:50:15.008 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:50:15.257 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 05:50:15.609 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:51:53.101 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - TOTP setup requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:51:54.454 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - TOTP setup initiated for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:52:14.296 INFO  [http-nio-0.0.0.0-8002-exec-5] c.e.user.controller.UserController - TOTP verification requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:52:14.528 WARN  [http-nio-0.0.0.0-8002-exec-5] c.e.user.services.UserProfileService - Invalid TOTP code for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:52:55.211 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - TOTP verification requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:52:55.644 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - TOTP enabled successfully for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:53:21.468 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:53:21.469 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:53:21.692 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 05:53:22.082 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:53:54.929 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:53:54.931 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:53:55.179 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 05:53:55.572 INFO  [http-nio-0.0.0.0-8002-exec-10] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:58:42.193 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:58:42.203 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:58:43.218 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 05:58:43.660 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:59:04.283 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - TOTP login verification for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:59:04.548 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:59:04.906 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:59:28.659 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - Admin blocking user: p2GOSKv6d6JvyKobTm7B
+2025-10-23 05:59:40.470 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 05:59:40.471 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 05:59:40.728 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.services.UserProfileService - TOTP required for user: leonardo@example.com
+2025-10-23 05:59:41.022 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 05:59:55.044 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - TOTP login verification for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:59:55.212 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.services.UserProfileService - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 05:59:55.505 INFO  [http-nio-0.0.0.0-8002-exec-1] c.e.user.controller.UserController - Login with TOTP successful for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 06:00:24.110 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.controller.UserController - TOTP disable requested by user: 3itilAKm9QTM11vrn1G9
+2025-10-23 06:00:24.717 INFO  [http-nio-0.0.0.0-8002-exec-3] c.e.user.services.UserProfileService - TOTP disabled successfully for user: 3itilAKm9QTM11vrn1G9
+2025-10-23 06:00:35.522 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 06:00:35.523 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 06:00:35.747 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 06:00:36.131 INFO  [http-nio-0.0.0.0-8002-exec-7] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 06:01:09.193 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 06:01:09.196 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 06:01:09.463 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 06:01:09.860 INFO  [http-nio-0.0.0.0-8002-exec-8] c.e.user.controller.UserController - Login successful for email: leonardo@example.com
+2025-10-23 06:05:48.645 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login request received for email: leonardo@example.com
+2025-10-23 06:05:48.647 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login attempt for email: leonardo@example.com
+2025-10-23 06:05:49.140 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.services.UserProfileService - Login successful for user: leonardo@example.com (3itilAKm9QTM11vrn1G9)
+2025-10-23 06:05:49.500 INFO  [http-nio-0.0.0.0-8002-exec-2] c.e.user.controller.UserController - Login successful for email: leonardo@example.com

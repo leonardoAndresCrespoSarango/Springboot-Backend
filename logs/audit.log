@@ -797,3 +797,21 @@ org.springframework.web.client.HttpServerErrorException$InternalServerError: 500
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Unknown Source)
+2025-10-23 05:33:11.262 WARN  [http-nio-0.0.0.0-8002-exec-3] com.etikos.user.audit.AuditService - 🔴 LOGIN FAILED - Email: leonardo@example.com | Reason: INVALID_PASSWORD | IP: 172.18.0.1
+2025-10-23 05:44:28.088 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 2800:5f0:1520:55bd:fab:42ed:d4d0:5aea
+2025-10-23 05:46:20.961 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 190.110.44.123
+2025-10-23 05:49:03.442 INFO  [http-nio-0.0.0.0-8002-exec-4] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 190.110.44.123
+2025-10-23 05:50:15.608 INFO  [http-nio-0.0.0.0-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:51:54.936 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:52:56.056 INFO  [http-nio-0.0.0.0-8002-exec-10] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:53:22.081 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 190.110.44.123
+2025-10-23 05:53:55.572 INFO  [http-nio-0.0.0.0-8002-exec-10] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:58:43.659 INFO  [http-nio-0.0.0.0-8002-exec-9] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:59:04.905 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:59:29.153 INFO  [http-nio-0.0.0.0-8002-exec-3] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: USER_BLOCKED | User: p2GOSKv6d6JvyKobTm7B | Actor: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:59:41.022 INFO  [http-nio-0.0.0.0-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 05:59:55.504 INFO  [http-nio-0.0.0.0-8002-exec-1] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 06:00:25.009 INFO  [http-nio-0.0.0.0-8002-exec-3] com.etikos.user.audit.AuditService - 📊 AUDIT LOG - Action: CREDENTIALS_UPDATED | User: 3itilAKm9QTM11vrn1G9 | Actor: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 06:00:36.130 INFO  [http-nio-0.0.0.0-8002-exec-7] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 06:01:09.859 INFO  [http-nio-0.0.0.0-8002-exec-8] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
+2025-10-23 06:05:49.500 INFO  [http-nio-0.0.0.0-8002-exec-2] com.etikos.user.audit.AuditService - ✅ LOGIN SUCCESS - User: 3itilAKm9QTM11vrn1G9 | IP: 172.18.0.1
