@@ -88,3 +88,25 @@ Para dispositivos moviles se debera ejecutar el comando `npx cap sync android` o
  y luego se debera ejecutar el comando `npx cap run android` o `npx cap run android` para ejecutar la aplicacion en el dispositivo.
 
 Ante dudas consulta la documentacion oficial de IONIC: https://capacitorjs.com/docs/android o el archivo `README.md` dentro del repositorio Frontend.
+
+En esta prueba se aplico con Android Studio para moviles Android.
+
+# Documentacion
+## Backend
+Se aplico una documentación mediante Swagger UI. para mayor información de los controladores, puedes visualizar esta documentacion mediante:
+- http://localhost:8002/swagger-ui/index.html
+- http://localhost:8003/swagger-ui/index.html
+## Frontend
+Se aplico una documentación mediante Compodoc. para mayor información de los componentes, puedes visualizar:
+```bash
+# Generar documentacion estandar
+npx compodoc -p tsconfig.doc.json
+
+# Servir con live reload en http://localhost:8080
+npx compodoc -p tsconfig.doc.json -s -w
+```
+Ante dudas consulta la documentacion oficial de Compodoc: https://compodoc.app/guides/getting-started.html o el archivo `README.md` dentro del repositorio Frontend.
+# Extras
+- Aplicación de empaquetador de archivos (Frontend) mediante pnpm para mayor seguiridad de dependencias y versiones, utilizando reglas de tiempo
+- Gestión de Roles por parte del Backend (ADMIN,CUSTOMER,MANAGER)
+

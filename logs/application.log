@@ -1231,3 +1231,4 @@ Caused by: org.springframework.web.client.HttpServerErrorException$InternalServe
 2025-10-23 18:37:52.922 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login attempt for email: admin@etikos.com
 2025-10-23 18:37:54.018 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.services.UserProfileService - Login successful for user: admin@etikos.com (9lUru6FC3t6ibKrGBkp7)
 2025-10-23 18:37:54.738 INFO  [http-nio-0.0.0.0-8002-exec-9] c.e.user.controller.UserController - Login successful for email: admin@etikos.com
+2025-10-23 20:03:14.082 INFO  [http-nio-0.0.0.0-8002-exec-9] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 723 ms
