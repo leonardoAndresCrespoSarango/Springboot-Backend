@@ -110,7 +110,10 @@ Ante dudas consulta la documentacion oficial de Compodoc: https://compodoc.app/g
 - Aplicación de empaquetador de archivos (Frontend) mediante pnpm para mayor seguiridad de dependencias y versiones, utilizando reglas de tiempo
 - Gestión de Roles por parte del Backend (ADMIN,CUSTOMER,MANAGER) y gestion de permisos por rol.
 - El Administrador tiene su propio componente unico para gestionar usuarios, mientras que el usuario solo peudes visualizar el dashboard.
-- Autenticación mediante JWT, MFA y biometria.
+- Seguridad mediante JWT,
+- Autenticacion mobil mediante biometria.
+- Autenticacion Web mediante TOTP.
+- Autenticacion mediante Firebase/Firestore con usuario y contraseña.
 - Backend lanza un usuario admin por defecto para poder utilizar la aplicacion sin problemas
 # Conclusiones
 Este proyecto es un ejemplo de una arquitectura de microservicios, con una arquitectura de microservicios de alto nivel.
