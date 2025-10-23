@@ -67,8 +67,6 @@ Una vez en marcha:
 - Puedes ajustar recursos JVM modificando `JAVA_OPTS` en `docker-compose.yml`.
 
 ## Buenas practicas
-- No versionar `.env` con secretos reales; usa gestores como Docker secrets, Vault o almacenes cloud en entornos productivos.
-- Automatiza la regeneracion de imagenes con pipelines que ejecuten `docker buildx` si necesitas multiplataforma.
 - Monitorea consumo con `docker stats` y mantente atento a los health checks para detectar reinicios inesperados.
 
 Para detalles adicionales de comandos y troubleshooting consulta `DOCKER_GUIDE.md`.
